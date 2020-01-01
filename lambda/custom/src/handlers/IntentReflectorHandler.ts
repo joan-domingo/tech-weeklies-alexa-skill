@@ -5,8 +5,11 @@ import {
   RequestHandler
 } from 'ask-sdk-core';
 
-// The intent reflector is used for interaction model testing and debugging.
-// It will simply repeat the intent the user said.
+/* *
+ * The intent reflector is used for interaction model testing and debugging.
+ * It will simply repeat the intent the user said. You can create custom handlers for your intents
+ * by defining them above, then also adding them to the request handler chain below
+ * */
 export class IntentReflectorHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
     return getRequestType(input.requestEnvelope) === 'IntentRequest';
@@ -14,7 +17,9 @@ export class IntentReflectorHandler implements RequestHandler {
 
   handle(input: HandlerInput) {
     const intentName = getIntentName(input.requestEnvelope);
-    const speakOutput = `You just triggered ${intentName}`;
+    const speakOutput = input.attributesManager
+      .getRequestAttributes()
+      .t('REFLECTOR_MSG', { intentName: intentName });
 
     return (
       input.responseBuilder

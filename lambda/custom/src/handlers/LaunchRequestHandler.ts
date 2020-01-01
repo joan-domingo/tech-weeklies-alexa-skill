@@ -16,7 +16,8 @@ export class LaunchRequestHandler implements RequestHandler {
 
   async handle(input: HandlerInput) {
     const podcast: Podcast = await this.podcastManager.getCurrentPodcast()!;
-    const speakOutput = 'playing podcast...';
+    const speakOutput = 'Hello to this alexa thing';
+
     console.log('PODCAST DATA: ', podcast);
 
     return input.responseBuilder

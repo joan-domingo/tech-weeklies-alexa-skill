@@ -10,6 +10,8 @@ import { IntentReflectorHandler } from './handlers/IntentReflectorHandler';
 import { CustomErrorHandler } from './handlers/CustomErrorHandler';
 import { PodcastManager } from './PodcastManager';
 import { LambdaHandler } from 'ask-sdk-core/dist/skill/factory/BaseSkillFactory';
+import { LocalisationRequestInterceptor } from './interceptors/LocalisationRequestInterceptor';
+import { FallbackIntentHandler } from './handlers/FallbackIntentHandler';
 
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -26,10 +28,13 @@ function buildLambdaSkill(): LambdaHandler {
       new NoIntentHandler(),
       new HelpIntentHandler(),
       new CancelAndStopIntentHandler(),
+      new FallbackIntentHandler(),
       new SessionEndedRequestHandler(),
       new IntentReflectorHandler() // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     )
     .addErrorHandlers(new CustomErrorHandler())
+    .addRequestInterceptors(new LocalisationRequestInterceptor())
+    .withCustomUserAgent('tech-weeklies-skill')
     .lambda();
 }
 
