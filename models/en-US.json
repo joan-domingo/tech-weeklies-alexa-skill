@@ -4,37 +4,61 @@
             "invocationName": "tech weeklies",
             "intents": [
                 {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
+                    "name": "AMAZON.CancelIntent"
                 },
                 {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
+                    "name": "AMAZON.HelpIntent"
                 },
                 {
-                    "name": "AMAZON.StopIntent",
-                    "samples": []
+                    "name": "AMAZON.StopIntent"
                 },
                 {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
+                    "name": "AMAZON.PauseIntent"
+                },
+                {
+                    "name": "AMAZON.ResumeIntent"
+                },
+                {
+                    "name": "AMAZON.PreviousIntent"
+                },
+                {
+                    "name": "AMAZON.StartOverIntent"
+                },
+                {
+                    "name": "AMAZON.YesIntent"
+                },
+                {
+                    "name": "AMAZON.NoIntent"
+                },
+                {
+                    "name": "AMAZON.NextIntent"
+                },
+                {
+                    "name": "PlayPodcastIntent",
                     "samples": [
-                        "hello",
-                        "how are you",
-                        "say hi world",
-                        "say hi",
-                        "hi",
-                        "say hello world",
-                        "say hello"
+                        "start",
+                        "begin",
+                        "play anything",
+                        "play something",
+                        "play podcast",
+                        "play a podcast",
+                        "play the latest podcast",
+                        "begin podcast",
+                        "begin the podcast",
+                        "begin playing the podcast",
+                        "start podcast",
+                        "start the podcast",
+                        "start playing the podcast",
+                        "play the podcast",
+                        "to play",
+                        "to begin podcast",
+                        "to begin the podcast",
+                        "to begin playing the podcast",
+                        "to start podcast",
+                        "to start the podcast",
+                        "to start playing the podcast",
+                        "to play the podcast"
                     ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.FallbackIntent",
-                    "samples": []
                 }
             ],
             "types": []
