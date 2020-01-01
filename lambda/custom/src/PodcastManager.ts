@@ -11,7 +11,7 @@ export class PodcastManager {
     this.parser = new Parser();
   }
 
-  private fetchPodcasts(callback: (podcasts: Podcast[] | null) => void) {
+  public fetchPodcasts(callback: (podcasts: Podcast[] | null) => void) {
     this.parser.parseURL(
       'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
       (err: Error, feed: Parser.Output) => {
