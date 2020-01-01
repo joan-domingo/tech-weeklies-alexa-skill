@@ -6,4 +6,4 @@ echo "Building application..."
 cp package.json dist && cd dist && npm install --production
 
 echo "Deploying skill..."
-cd .. && cd .. && cd .. && ask deploy
+cd .. && cd .. && cd .. && ask deploy --force
