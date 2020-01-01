@@ -1,2 +1,4 @@
 node_modules/
 .ask/
+/lambda/custom/dist/
+asktemp*
