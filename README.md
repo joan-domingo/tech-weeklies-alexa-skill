@@ -1,20 +1,23 @@
-# Build An Alexa Hello World Skill
-<img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/header._TTH_.png" />
-
-### This is a simple tutorial to introduce a simple Alexa skill and code.
+# Futurice Tech Weeklies Alexa Skill
 
 ## Skill Architecture
 Each skill consists of two basic parts, a front end and a back end.
 The front end is the voice interface, or VUI.
-The voice interface is configured through the voice interaction model.
-The back end is where the logic of your skill resides.
+The voice interface is configured through the voice interaction model and can be found in the models folder.
+The back end is where the logic of your skill resides. It's in the lambda folder.
 
-## Three Options for Skill Setup
-There are a number of different ways for you to setup your skill, depending on your experience and what tools you have available.
+## Skill Setup
+This project was set up using the AWS ASK Command Line Interface: [ASK CLI instructions](./instructions/cli.md).
 
- * If this is your first skill, choose the [Alexa-Hosted backend instructions](./instructions/setup-vui-alexa-hosted.md) to get started quickly.
- * If you want to manage the backend resources in your own AWS account, you can follow the [AWS-Hosted instructions](./instructions/setup-vui-aws-hosted.md).
- * Developers with the ASK Command Line Interface configured may follow the [ASK CLI instructions](./instructions/cli.md).
+## Deploy
+* BE or Lambda function: it's build and deployed after each push on master with the help of
+[Github Actions](.github/workflows/deployLambdaFunction.yml)
+* FE or interaction models: `ask deploy -t model --force`
+* Skill schema:  `ask deploy -t skill --force`
+
+## Simulate
+Simulate the Alexa skill using `ask dialog --locale en-US` command.
+
 
 ---
 
