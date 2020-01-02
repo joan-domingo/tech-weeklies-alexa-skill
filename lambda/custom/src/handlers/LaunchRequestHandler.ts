@@ -15,9 +15,6 @@ export class LaunchRequestHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    // const podcast: Podcast = await this.podcastManager.getCurrentPodcast()!;
-    // const speakOutput = 'Hello to this alexa thing';
-
     return new Promise((resolve: (value: Response) => void) => {
       this.podcastManager.fetchPodcasts(podcasts => {
         const podcast = podcasts![0];
@@ -45,30 +42,5 @@ export class LaunchRequestHandler implements RequestHandler {
         );
       });
     });
-
-    /*return input.responseBuilder
-      .speak(input.attributesManager.getRequestAttributes().t('WELCOME_MSG'))
-      .getResponse();*/
-
-    //console.log('PODCAST DATA: ', podcast);
-
-    /* return input.responseBuilder
-      .speak(speakOutput)
-      .addAudioPlayerPlayDirective(
-        'REPLACE_ALL',
-        podcast.enclosure.url,
-        podcast.guid,
-        0,
-        undefined,
-        getPodcastMetadata(podcast)
-      )
-      .withStandardCard(
-        podcast.title,
-        podcast.itunes.summary,
-        podcast.itunes.image,
-        podcast.itunes.image
-      )
-      .withShouldEndSession(true)
-      .getResponse(); */
   }
 }

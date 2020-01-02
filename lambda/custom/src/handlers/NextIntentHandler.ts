@@ -6,6 +6,7 @@ import {
 } from 'ask-sdk-core';
 import { PodcastManager } from '../PodcastManager';
 import { getPodcastMetadata } from '../util/podcastUtil';
+import { Response } from 'ask-sdk-model';
 
 export class NextIntentHandler implements RequestHandler {
   private podcastManager: PodcastManager;
@@ -21,7 +22,7 @@ export class NextIntentHandler implements RequestHandler {
     );
   }
 
-  handle(input: HandlerInput) {
+  handle(input: HandlerInput): Promise<Response> | Response {
     const speakOutput = 'playing next podcast...';
     const podcast = this.podcastManager.getNextPodcast()!;
 

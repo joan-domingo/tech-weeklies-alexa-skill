@@ -1,4 +1,5 @@
 import { ErrorHandler, HandlerInput } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
 
 /**
  * Generic error handling to capture any syntax or routing errors. If you receive an error
@@ -10,7 +11,7 @@ export class CustomErrorHandler implements ErrorHandler {
     return true;
   }
 
-  handle(input: HandlerInput, error: Error) {
+  handle(input: HandlerInput, error: Error): Promise<Response> | Response {
     const speakOutput = input.attributesManager
       .getRequestAttributes()
       .t('ERROR_MSG');

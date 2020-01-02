@@ -4,6 +4,7 @@ import {
   HandlerInput,
   RequestHandler
 } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
 
 export class CancelAndStopIntentHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
@@ -15,7 +16,7 @@ export class CancelAndStopIntentHandler implements RequestHandler {
     );
   }
 
-  handle(input: HandlerInput) {
+  handle(input: HandlerInput): Promise<Response> | Response {
     const speakOutput = 'See you later, alligator!';
 
     return input.responseBuilder

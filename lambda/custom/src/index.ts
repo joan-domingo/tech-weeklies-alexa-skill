@@ -17,7 +17,6 @@ import { FallbackIntentHandler } from './handlers/FallbackIntentHandler';
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
 function buildLambdaSkill(): LambdaHandler {
-  console.log('init skill...');
   const podcastManager = new PodcastManager();
 
   return SkillBuilders.custom()

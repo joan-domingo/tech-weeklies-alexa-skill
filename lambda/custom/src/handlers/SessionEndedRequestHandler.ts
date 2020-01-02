@@ -1,4 +1,5 @@
 import { getRequestType, HandlerInput, RequestHandler } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
 
 /* *
  * SessionEndedRequest notifies that a session was ended. This handler will be triggered when a currently open
@@ -10,7 +11,7 @@ export class SessionEndedRequestHandler implements RequestHandler {
     return getRequestType(input.requestEnvelope) === 'SessionEndedRequest';
   }
 
-  handle(input: HandlerInput) {
+  handle(input: HandlerInput): Promise<Response> | Response {
     console.log(`~~~~ Session ended: ${JSON.stringify(input.requestEnvelope)}`);
     // Any cleanup logic goes here.
     return input.responseBuilder.getResponse(); // notice we send an empty response

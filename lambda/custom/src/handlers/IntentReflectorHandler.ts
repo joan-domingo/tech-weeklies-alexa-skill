@@ -4,6 +4,7 @@ import {
   HandlerInput,
   RequestHandler
 } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
 
 /* *
  * The intent reflector is used for interaction model testing and debugging.
@@ -15,7 +16,7 @@ export class IntentReflectorHandler implements RequestHandler {
     return getRequestType(input.requestEnvelope) === 'IntentRequest';
   }
 
-  handle(input: HandlerInput) {
+  handle(input: HandlerInput): Promise<Response> | Response {
     const intentName = getIntentName(input.requestEnvelope);
     const speakOutput = input.attributesManager
       .getRequestAttributes()

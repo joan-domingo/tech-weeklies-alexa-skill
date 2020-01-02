@@ -1,5 +1,6 @@
 import { CustomSkillRequestHandler } from 'ask-sdk-core/dist/dispatcher/request/handler/CustomSkillRequestHandler';
 import { getIntentName, getRequestType, HandlerInput } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
 
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
@@ -14,7 +15,7 @@ export class FallbackIntentHandler implements CustomSkillRequestHandler {
     );
   }
 
-  handle(input: HandlerInput) {
+  handle(input: HandlerInput): Promise<Response> | Response {
     const speakOutput = input.attributesManager
       .getRequestAttributes()
       .t('FALLBACK_MSG');

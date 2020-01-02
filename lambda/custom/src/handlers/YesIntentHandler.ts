@@ -4,6 +4,7 @@ import {
   HandlerInput,
   RequestHandler
 } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
 
 export class YesIntentHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
@@ -13,7 +14,7 @@ export class YesIntentHandler implements RequestHandler {
     );
   }
 
-  handle(input: HandlerInput) {
+  handle(input: HandlerInput): Promise<Response> | Response {
     // const attributesManager = input.attributesManager;
     // const sessionAttributes = attributesManager.getSessionAttributes();
 
