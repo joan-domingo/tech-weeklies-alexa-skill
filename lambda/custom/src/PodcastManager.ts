@@ -1,5 +1,8 @@
 import * as Parser from 'rss-parser';
 import { Podcast } from './model/podcastModel';
+import { HandlerInput } from 'ask-sdk-core';
+import { Response } from 'ask-sdk-model';
+import { getPodcastMetadata } from './util/podcastUtil';
 
 export class PodcastManager {
   private podcasts: Podcast[] | null | undefined = undefined;
@@ -51,5 +54,49 @@ export class PodcastManager {
       }
       return this.podcasts![this.podcastIndex];
     }
+  }
+
+  public playCurrentPodcast(
+    input: HandlerInput,
+    speakOutputKey: string
+  ): Response | Promise<Response> {
+    if (this.podcasts === undefined) {
+      return new Promise(resolve => {
+        this.fetchPodcasts(podcasts => {
+          this.podcasts = podcasts;
+          resolve(this.playPodcast(input, speakOutputKey));
+        });
+      });
+    } else {
+      return this.playPodcast(input, speakOutputKey);
+    }
+  }
+
+  private playPodcast(input: HandlerInput, speakOutputKey: string): Response {
+    if (this.podcasts) {
+      const podcast = this.podcasts[this.podcastIndex];
+      return input.responseBuilder
+        .speak(input.attributesManager.getRequestAttributes().t(speakOutputKey))
+        .addAudioPlayerPlayDirective(
+          'REPLACE_ALL',
+          podcast.enclosure.url,
+          podcast.guid,
+          0,
+          undefined,
+          getPodcastMetadata(podcast)
+        )
+        .withStandardCard(
+          podcast.title,
+          podcast.itunes.summary,
+          podcast.itunes.image,
+          podcast.itunes.image
+        )
+        .withShouldEndSession(true)
+        .getResponse();
+    }
+    return input.responseBuilder
+      .speak(input.attributesManager.getRequestAttributes().t('GOODBYE_MSG'))
+      .withShouldEndSession(true)
+      .getResponse();
   }
 }
