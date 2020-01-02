@@ -3,59 +3,20 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "name": "tech-weeklies-skill",
+          "name": "Futurice Tech Weeklies",
           "summary": "Sample Short Description",
           "description": "Sample Full Description",
           "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+            "Alexa open Tech Weeklies"
           ],
-          "keywords": []
-        },
-        "en-GB": {
-          "name": "tech-weeklies-skill",
-          "summary": "Sample Short Description",
-          "description": "Sample Full Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
+          "keywords": [
+            "Futurice",
+            "Tech",
+            "Weeklies",
+            "Podcasts"
           ],
-          "keywords": []
-        },
-        "en-CA": {
-          "name": "tech-weeklies-skill",
-          "summary": "Sample Short Description",
-          "description": "Sample Full Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
-          "keywords": []
-        },
-        "en-IN": {
-          "name": "tech-weeklies-skill",
-          "summary": "Sample Short Description",
-          "description": "Sample Full Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
-          "keywords": []
-        },
-        "en-AU": {
-          "name": "tech-weeklies-skill",
-          "summary": "Sample Short Description",
-          "description": "Sample Full Description",
-          "examplePhrases": [
-            "Alexa open hello world",
-            "hello",
-            "help"
-          ],
-          "keywords": []
+          "smallIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_108.png",
+          "largeIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_512.png"
         }
       },
       "isAvailableWorldwide": true,
@@ -71,6 +32,13 @@
         }
       }
     },
-    "manifestVersion": "1.0"
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    }
   }
 }
