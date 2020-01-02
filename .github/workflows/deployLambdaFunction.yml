@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@master
 
     - name: Install dependencies
-      run: npm install --prefix lambda/custom/
+      run: npm install --prefix lambda/custom/ --production
 
     - name: Build skill
       run: npm run-script build --prefix lambda/custom/

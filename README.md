@@ -7,7 +7,7 @@ The voice interface is configured through the voice interaction model and can be
 The back end is where the logic of your skill resides. It's in the lambda folder.
 
 ## Skill Setup
-This project was set up using the AWS ASK Command Line Interface: [ASK CLI instructions](./instructions/cli.md).
+This project was set up using the AWS ASK Command Line Interface (ASK-CLI).
 
 ## Deploy
 * BE or Lambda function: it's build and deployed after each push on master with the help of

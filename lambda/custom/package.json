@@ -10,15 +10,15 @@
   "author": "Joan Domingo Sallent",
   "license": "Apache License",
   "dependencies": {
+    "@types/xml2js": "^0.4.5",
     "ask-sdk-core": "^2.7.0",
     "ask-sdk-model": "^1.19.0",
     "aws-sdk": "^2.326.0",
     "i18next": "^15.0.5",
-    "rss-parser": "^3.7.3"
+    "rss-parser": "^3.7.3",
+    "typescript": "^3.7.4"
   },
   "devDependencies": {
-    "@types/xml2js": "^0.4.5",
-    "prettier": "^1.19.1",
-    "typescript": "^3.7.4"
+    "prettier": "^1.19.1"
   }
 }

@@ -29,7 +29,12 @@
         "endpoint": {
           "sourceDir": "lambda/custom",
           "uri": "tech-weeklies-skill"
-        }
+        },
+        "interfaces": [
+          {
+            "type":"AUDIO_PLAYER"
+          }
+        ]
       }
     },
     "manifestVersion": "1.0",
