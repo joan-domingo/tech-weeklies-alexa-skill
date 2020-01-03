@@ -13,13 +13,21 @@ export class LaunchRequestHandler implements RequestHandler {
     return getRequestType(input.requestEnvelope) === 'LaunchRequest';
   }
 
-  handle(input: HandlerInput): Promise<Response> | Response {
-    const speakOutputKey = 'WELCOME_MSG';
+  async handle(input: HandlerInput): Promise<Response> {
+    let speakOutputKey = 'WELCOME_MSG';
 
-    return new Promise(
-      (resolve: (value: Promise<Response> | Response) => void) => {
-        resolve(this.podcastManager.playCurrentPodcast(input, speakOutputKey));
-      }
-    );
+    const persistentAttributes = await input.attributesManager.getPersistentAttributes();
+
+    console.log(persistentAttributes);
+    if (persistentAttributes.isOnboarded) {
+      speakOutputKey = 'Welcome again';
+    } else {
+      persistentAttributes.isOnboarded = true;
+    }
+    console.log(persistentAttributes);
+
+    input.attributesManager.setPersistentAttributes(persistentAttributes);
+
+    return this.podcastManager.playCurrentPodcast(input, speakOutputKey);
   }
 }

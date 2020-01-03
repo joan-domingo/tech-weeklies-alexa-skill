@@ -15,9 +15,15 @@ This project was set up using the AWS ASK Command Line Interface (ASK-CLI).
 * FE or interaction models: `ask deploy -t model --force`
 * Skill schema:  `ask deploy -t skill --force`
 
+*IMPORTANT:* This project uses Typescript and needs to be compiled to Javascript before deploying to Lambda.
+That's why only Github Actions will successfully deploy. Avoid `ask deploy` commands if you want to update
+the Lambda Function.
+
 ## Simulate
 Simulate the Alexa skill using `ask dialog --locale en-US` command.
 
+## Debug
+Find debug info [here](https://developer.amazon.com/blogs/alexa/post/77c8f0b9-e9ee-48a9-813f-86cf7bf86747/setup-your-local-environment-for-debugging-an-alexa-skill)
 
 ---
 
