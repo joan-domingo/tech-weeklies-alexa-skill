@@ -1,5 +1,7 @@
-export interface PersistenceAttributes {
-  hasPreviousSession: boolean;
+export interface PersistentAttributes {
+  profile: {
+    isFirstTimeOnboarded: boolean;
+  };
 }
 
 export interface SessionAttributes {}

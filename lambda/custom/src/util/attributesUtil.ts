@@ -1,21 +1,33 @@
 import { HandlerInput } from 'ask-sdk-core';
-import { SessionAttributes } from '../model/attributesModel';
+import {
+  PersistentAttributes,
+  SessionAttributes
+} from '../model/attributesModel';
 
-export async function getSessionAttributes(handlerInput: HandlerInput) {
+/** SESSION UTILS */
+
+export function getSessionAttributes(handlerInput: HandlerInput) {
   return handlerInput.attributesManager.getSessionAttributes<
     SessionAttributes
   >();
 }
 
-export function getPersistentAttributes(
+/** PERSISTENT UTILS */
+
+export async function getPersistentAttributes(
   handlerInput: HandlerInput
-): Promise<{ [key: string]: any }> {
-  return handlerInput.attributesManager.getPersistentAttributes();
+): Promise<PersistentAttributes> {
+  return (await handlerInput.attributesManager.getPersistentAttributes()) as PersistentAttributes;
 }
 
-export function setPersistentAttributes(
+export async function setAndSavePersistentAttributes(
   handlerInput: HandlerInput,
-  persistentAttributes: any
+  persistentAttributes: PersistentAttributes
 ) {
   handlerInput.attributesManager.setPersistentAttributes(persistentAttributes);
+  await handlerInput.attributesManager.savePersistentAttributes();
+}
+
+export function isUserOnboarded(attrs: PersistentAttributes): boolean {
+  return attrs.profile && attrs.profile.isFirstTimeOnboarded;
 }

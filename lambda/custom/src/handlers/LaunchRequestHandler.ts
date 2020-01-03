@@ -1,6 +1,11 @@
 import { getRequestType, HandlerInput, RequestHandler } from 'ask-sdk-core';
 import { PodcastManager } from '../PodcastManager';
 import { Response } from 'ask-sdk-model';
+import {
+  getPersistentAttributes,
+  isUserOnboarded,
+  setAndSavePersistentAttributes
+} from '../util/attributesUtil';
 
 export class LaunchRequestHandler implements RequestHandler {
   private podcastManager: PodcastManager;
@@ -14,26 +19,19 @@ export class LaunchRequestHandler implements RequestHandler {
   }
 
   async handle(input: HandlerInput): Promise<Response> {
-    let speakOutputKey = 'WELCOME_MSG';
+    const persistentAttributes = await getPersistentAttributes(input);
+    let speakOutputKey;
 
-    const persistentAttributes = await input.attributesManager.getPersistentAttributes();
-
-    console.log(persistentAttributes);
-    if (
-      persistentAttributes.profile &&
-      persistentAttributes.profile.isFirstTimeOnboarded
-    ) {
+    if (isUserOnboarded(persistentAttributes)) {
       speakOutputKey = 'Welcome again';
     } else {
-      console.log('2');
+      speakOutputKey = 'WELCOME_MSG';
       persistentAttributes.profile = {
         isFirstTimeOnboarded: true
       };
     }
-    console.log(persistentAttributes);
 
-    input.attributesManager.setPersistentAttributes(persistentAttributes);
-    await input.attributesManager.savePersistentAttributes();
+    await setAndSavePersistentAttributes(input, persistentAttributes);
 
     return this.podcastManager.playCurrentPodcast(input, speakOutputKey);
   }
