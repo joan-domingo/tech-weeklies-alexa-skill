@@ -1,5 +1,3 @@
-import { SkillBuilders } from 'ask-sdk-core';
-import { DynamoDbPersistenceAdapter } from 'ask-sdk-dynamodb-persistence-adapter';
 import { LaunchRequestHandler } from './handlers/LaunchRequestHandler';
 import { YesIntentHandler } from './handlers/YesIntentHandler';
 import { NextIntentHandler } from './handlers/NextIntentHandler';
@@ -10,21 +8,18 @@ import { SessionEndedRequestHandler } from './handlers/SessionEndedRequestHandle
 import { IntentReflectorHandler } from './handlers/IntentReflectorHandler';
 import { CustomErrorHandler } from './handlers/CustomErrorHandler';
 import { PodcastManager } from './PodcastManager';
-import { LambdaHandler } from 'ask-sdk-core/dist/skill/factory/BaseSkillFactory';
 import { LocalisationRequestInterceptor } from './interceptors/LocalisationRequestInterceptor';
 import { FallbackIntentHandler } from './handlers/FallbackIntentHandler';
+import { SkillBuilders } from 'ask-sdk';
+import { LambdaHandler } from 'ask-sdk-core/dist/skill/factory/BaseSkillFactory';
 
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
 function buildLambdaSkill(): LambdaHandler {
-  const dynamoDbPersistenceAdapter = new DynamoDbPersistenceAdapter({
-    tableName: 'dynamodb-techweeklies-alexaskill',
-    createTable: true
-  });
   const podcastManager = new PodcastManager();
 
-  return SkillBuilders.custom()
+  return SkillBuilders.standard()
     .addRequestHandlers(
       new LaunchRequestHandler(podcastManager),
       new NextIntentHandler(podcastManager),
@@ -39,7 +34,8 @@ function buildLambdaSkill(): LambdaHandler {
     .addErrorHandlers(new CustomErrorHandler())
     .addRequestInterceptors(new LocalisationRequestInterceptor())
     .withCustomUserAgent('tech-weeklies-skill')
-    .withPersistenceAdapter(dynamoDbPersistenceAdapter)
+    .withAutoCreateTable(true)
+    .withTableName('dynamodb-techweeklies-alexaskill')
     .lambda();
 }
 
