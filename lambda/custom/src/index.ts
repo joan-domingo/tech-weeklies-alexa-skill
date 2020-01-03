@@ -34,7 +34,6 @@ function buildLambdaSkill(): LambdaHandler {
     .addErrorHandlers(new CustomErrorHandler())
     .addRequestInterceptors(new LocalisationRequestInterceptor())
     .withCustomUserAgent('tech-weeklies-skill')
-    .withAutoCreateTable(true)
     .withTableName('dynamodb-techweeklies-alexaskill')
     .lambda();
 }

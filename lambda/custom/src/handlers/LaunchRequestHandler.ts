@@ -19,14 +19,21 @@ export class LaunchRequestHandler implements RequestHandler {
     const persistentAttributes = await input.attributesManager.getPersistentAttributes();
 
     console.log(persistentAttributes);
-    if (persistentAttributes.isOnboarded) {
+    if (
+      persistentAttributes.profile &&
+      persistentAttributes.profile.isFirstTimeOnboarded
+    ) {
       speakOutputKey = 'Welcome again';
     } else {
-      persistentAttributes.isOnboarded = true;
+      console.log('2');
+      persistentAttributes.profile = {
+        isFirstTimeOnboarded: true
+      };
     }
     console.log(persistentAttributes);
 
     input.attributesManager.setPersistentAttributes(persistentAttributes);
+    await input.attributesManager.savePersistentAttributes();
 
     return this.podcastManager.playCurrentPodcast(input, speakOutputKey);
   }
