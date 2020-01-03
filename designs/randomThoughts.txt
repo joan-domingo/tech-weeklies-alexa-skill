@@ -1,0 +1,26 @@
+Onboarding User vs Onboarded user
+----------------------------------
+Welcome to Tech Weeklies. Here you can listen to the audio podcasts that Futurice produces ... bla bla bla. You have the options to ... bla bla bla...
+What would you like listen to the latest podcast
+
+I noticed this is the first time you are using...
+
+Welcome back! last time you were listening to xxx, would you like to resume where you left it?
+
+
+
+
+Playlist vs 1 podcast at a time
+--------------------------------
+Play playlist in a asc/desc order by release date?
+Shuffle playlist?
+
+
+
+
+Open Alexa skill and...
+-----------------------
+* play latest podcast
+* or play random podcast
+* or resume last podcast which was playing
+* or play podcast by topic

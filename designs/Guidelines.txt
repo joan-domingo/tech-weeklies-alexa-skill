@@ -1,0 +1,65 @@
+Based on the online workshop "Designing for Conversation":
+https://developer.amazon.com/ask-resources/guided/conversational-design-workshop
+
+== Highlights from the workshop ==
+
+Conversational skills:
+----------------------
+    Be Personal by cooperating with the user. Provide
+    the user opportunity to have a natural back and forth dialog, adapting
+    to the user's preferred way of speaking and changing context.
+
+    Be Adaptable by solving a problem for users and being careful not to create more of them. Make their lives easier by adapting to the nuances
+    of the user's intended speech patterns and context.
+
+    Be Relatable. Respond with information relevant to the user's intended context, and confirming shared understanding with the user only when
+    necessary.
+
+    Be Available by remembering and
+    build upon past interactions in order to improve and speed up future
+    ones through increased understanding of and navigation through context.
+
+
+
+When thinking through who's going to use your skill, ask the following:
+-----------------------------------------------------------------------
+    Who are the people that will use my skill?
+    (background, interests, motivation, etc.)
+
+    What will they expect from my skill?
+    (NOTE: Most people don't know what they want when they interact with an Alexa skill but they have expectations)
+
+    When and where are they most likely to use my skill?
+    (home, office, warehouse, lunchtime, etc.)
+
+    How will they interact with my skill?
+    (Will they use slang or jargon of any kind?)
+
+
+
+Script it out
+--------------
+    Flowcharts are a terrible way to
+    design for conversation. When you design with flow charts, you step into
+    a potentially endless exercise of trying to predict and specify the
+    next step in a conversation. The result is a Skill that has more in
+    common with a phone tree than a natural human conversation.
+
+    Instead, we're going to focus on scripting the 'happy path':
+    the best-case, easiest interaction possible in our skill. While this
+    isn't always the most likely scenario, it's a good place to start from.
+
+
+The value of scripting:
+-----------------------
+
+    Always build the simplest version first. Your script is the underlying backbone for the interaction. Keep it simple and add complexity bit-by-bit.
+
+    Read out your dialog!
+    The written word is vastly different from the way we speak. Grab a
+    friend or colleague and read your script aloud to expose awkward
+    sounding words and phrases.
+
+    Prepare for the unexpected.
+    You'll start to identify situations where the user might say something
+    unexpected, such as a synonym or a completely different utterance.
