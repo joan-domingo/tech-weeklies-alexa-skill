@@ -1,0 +1,34 @@
+First-time user with NO specific request
+-----------------
+User: Open tech weeklies
+Alexa: Welcome to Futurice Tech Weeklies. Ask me to play the latest podcast or a random one. What would you like to do?
+
+Onboarded user invoking skill with NO specific request
+https://developer.amazon.com/en-US/docs/alexa/custom-skills/understanding-how-users-invoke-custom-skills.html#invoking-a-skill-with-no-specific-request-no-intent
+-------------------------------------------------------
+User: Open/launch/etc tech weeklies
+Alexa: Welcome back.* Would you like to resume the podcast you were listening to? (If last time the user quite while listening a podcast)
+                    * Would you like to listen to the latest podcast? (If the user hasn't listened to the latest podcast and has no in-progress podcasts)
+                    * Would you like to listen to a random podcast (if the user has listened to the latest and has no-inprogress podcasts) (Developer mental note: store the token id of the listened podcasts so the user listens to a new one)
+User: Yes
+User: No, I would like to listen to/play/I would like to play/play me...* the latest/the last podcast
+                                                                        * a random podcast/ a podcast
+User: nothing/leave/quit
+Alexa: <Goodbye saying> -> https://answers.yahoo.com/question/index?qid=20080519161409AAI2Vka
+
+
+First-time user with specific request
+-----------------------------------------
+User: ask tech weeklies to play a podcast
+Alexa: Welcome to Futurice Tech Weeklies. Playing <Podcast Name>...
+
+
+Onboarded user invoking skill with specific request
+---------------------------------------------------
+User: tell Tech Weeklies to play the latest podcast
+Alexa: Playing <Podcast Name>...
+
+
+!!Developer mental notes:
+* Future feature: Play podcast by topic. Topic could be a word in podcast title/description.
+* don't do "playlists" for now. End session whenever a podcast ends. But react to "next" and "previous" commands when a podcast is being played.
