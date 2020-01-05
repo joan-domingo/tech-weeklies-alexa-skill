@@ -8,11 +8,17 @@
 export const languageStrings = {
   en: {
     translation: {
-      WELCOME_MSG:
-        'Welcome, you can say Hello or Help. Which would you like to try?',
-      HELLO_MSG: 'Hello World!',
-      HELP_MSG: 'You can say hello to me! How can I help?',
-      GOODBYE_MSG: 'Goodbye!',
+      ONBOARDING_WELCOME_MSG: 'Welcome to Futurice Tech Weeklies.',
+      WELCOME_MSG: 'Welcome back.',
+      RESUME_PODCAST_QUESTION:
+        'Would you like to resume the podcast you were listening to?',
+      PLAY_LATEST_PODCAST_QUESTION:
+        'Would you like to listen to the latest podcast?',
+      PLAY_RANDOM_PODCAST_QUESTION:
+        'Would you like to listen to a random podcast?',
+      HELP_MSG:
+        'Ask me to play the latest podcast or a random one. What would you like to do?',
+      GOODBYE_MSG: 'See you later alligater!',
       REFLECTOR_MSG: 'You just triggered {{intentName}}',
       FALLBACK_MSG: "Sorry, I don't know about that. Please try again.",
       ERROR_MSG: 'Sorry, I had trouble doing what you asked. Please try again.'

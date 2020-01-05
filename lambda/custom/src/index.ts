@@ -21,7 +21,7 @@ function buildLambdaSkill(): LambdaHandler {
 
   return SkillBuilders.standard()
     .addRequestHandlers(
-      new LaunchRequestHandler(podcastManager),
+      new LaunchRequestHandler(),
       new NextIntentHandler(podcastManager),
       new YesIntentHandler(),
       new NoIntentHandler(),
@@ -35,6 +35,7 @@ function buildLambdaSkill(): LambdaHandler {
     .addRequestInterceptors(new LocalisationRequestInterceptor())
     .withCustomUserAgent('tech-weeklies-skill')
     .withTableName('dynamodb-techweeklies-alexaskill')
+    .withAutoCreateTable(true)
     .lambda();
 }
 
