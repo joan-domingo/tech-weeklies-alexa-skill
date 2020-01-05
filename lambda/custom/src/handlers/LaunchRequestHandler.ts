@@ -19,14 +19,15 @@ export class LaunchRequestHandler implements RequestHandler {
 
     const outputMsg = this.determineOutputMsg(isOnboarded, input);
     const outputQuestion = this.determineOutputQuestion(isOnboarded, input);
+    const repromptOutputMsg = t(input, 'HELP_MSG');
 
     if (!isOnboarded) {
       this.setUserAsOnboarded(input, persistentAttributes);
     }
 
     return input.responseBuilder
-      .speak(`${outputMsg}${outputQuestion}`)
-      .reprompt('')
+      .speak(`${outputMsg} ${outputQuestion}`)
+      .reprompt(repromptOutputMsg)
       .getResponse();
   }
 

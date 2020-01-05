@@ -7,7 +7,7 @@ import {
 /** REQUEST UTILS */
 
 export function t(handlerInput: HandlerInput, key: string, args?: any) {
-  return handlerInput.attributesManager.getRequestAttributes().t('key', args);
+  return handlerInput.attributesManager.getRequestAttributes().t(key, args);
 }
 
 /** SESSION UTILS */
