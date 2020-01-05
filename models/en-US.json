@@ -13,27 +13,6 @@
                     "name": "AMAZON.StopIntent"
                 },
                 {
-                    "name": "AMAZON.PauseIntent"
-                },
-                {
-                    "name": "AMAZON.ResumeIntent"
-                },
-                {
-                    "name": "AMAZON.PreviousIntent"
-                },
-                {
-                    "name": "AMAZON.StartOverIntent"
-                },
-                {
-                    "name": "AMAZON.YesIntent"
-                },
-                {
-                    "name": "AMAZON.NoIntent"
-                },
-                {
-                    "name": "AMAZON.NextIntent"
-                },
-                {
                     "name": "PlayPodcastIntent",
                     "samples": [
                         "start",
@@ -59,6 +38,27 @@
                         "to start playing the podcast",
                         "to play the podcast"
                     ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent"
+                },
+                {
+                    "name": "AMAZON.ResumeIntent"
+                },
+                {
+                    "name": "AMAZON.PreviousIntent"
+                },
+                {
+                    "name": "AMAZON.StartOverIntent"
+                },
+                {
+                    "name": "AMAZON.YesIntent"
+                },
+                {
+                    "name": "AMAZON.NoIntent"
+                },
+                {
+                    "name": "AMAZON.NextIntent"
                 }
             ],
             "types": []
