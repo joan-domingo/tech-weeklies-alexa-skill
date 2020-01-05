@@ -27,7 +27,7 @@ function buildLambdaSkill(): LambdaHandler {
       new SessionEndedRequestHandler(),
       new YesIntentHandler(),
       new NoIntentHandler(),
-      new PlayPodcastHandler(),
+      new PlayPodcastHandler(podcastManager),
       new NextIntentHandler(podcastManager),
       new CancelAndStopIntentHandler(),
       new FallbackIntentHandler(),

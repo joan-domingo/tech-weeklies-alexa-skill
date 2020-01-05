@@ -5,8 +5,15 @@ import {
   RequestHandler
 } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
+import { PodcastManager } from '../PodcastManager';
 
 export class PlayPodcastHandler implements RequestHandler {
+  private podcastManager: PodcastManager;
+
+  constructor(podcastManager: PodcastManager) {
+    this.podcastManager = podcastManager;
+  }
+
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
     return (
       getRequestType(input.requestEnvelope) === 'IntentRequest' &&
@@ -15,8 +22,6 @@ export class PlayPodcastHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    return input.responseBuilder
-      .speak('PlayPodcastIntent invoked')
-      .getResponse();
+    return this.podcastManager.playCurrentPodcast(input, 'playing podcast...');
   }
 }
