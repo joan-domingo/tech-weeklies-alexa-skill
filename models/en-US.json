@@ -59,6 +59,9 @@
                 },
                 {
                     "name": "AMAZON.NextIntent"
+                },
+                {
+                    "name": "AMAZON.FallbackIntent"
                 }
             ],
             "types": []
