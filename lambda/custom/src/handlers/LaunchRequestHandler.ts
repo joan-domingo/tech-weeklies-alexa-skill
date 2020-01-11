@@ -24,9 +24,11 @@ export class LaunchRequestHandler implements RequestHandler {
   }
 
   async handle(input: HandlerInput): Promise<Response> {
+    console.log('hello');
     await this.podcastManager.fetchPodcasts();
+    console.log('hello2', this.podcastManager);
     if (!this.podcastManager.hasFetchedPodcastsSuccessfully()) {
-      return input.responseBuilder.speak('ERROR_MSG').getResponse();
+      return input.responseBuilder.speak(t(input, 'ERROR_MSG')).getResponse();
     }
 
     const persistentAttributes = await getPersistentAttributes(input);

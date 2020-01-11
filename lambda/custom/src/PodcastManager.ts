@@ -19,18 +19,22 @@ export class PodcastManager {
   }
 
   public async fetchPodcasts(): Promise<void> {
-    this.parser.parseURL(
-      'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
-      (err: Error, feed: Parser.Output) => {
-        if (err) {
-          this.podcasts = null;
-        } else {
-          this.podcasts = (feed.items as Podcast[]).filter((item: Podcast) =>
-            item.enclosure.type.includes('audio')
-          );
+    return new Promise(resolve => {
+      this.parser.parseURL(
+        'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
+        (err: Error, feed: Parser.Output) => {
+          console.log('output', err, feed);
+          if (err) {
+            this.podcasts = null;
+          } else {
+            this.podcasts = (feed.items as Podcast[]).filter((item: Podcast) =>
+              item.enclosure.type.includes('audio')
+            );
+          }
+          resolve();
         }
-      }
-    );
+      );
+    });
   }
 
   public getNextPodcast() {
