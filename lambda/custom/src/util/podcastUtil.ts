@@ -16,8 +16,8 @@ export function getPodcastMetadata(podcast: Podcast): AudioItemMetadata {
 }
 
 export function determineEpisodeFromIndex(
-  randomIndex: number,
+  index: number,
   podcasts: Podcast[]
 ): number {
-  return podcasts[randomIndex].episode;
+  return podcasts[index].itunes.episode;
 }

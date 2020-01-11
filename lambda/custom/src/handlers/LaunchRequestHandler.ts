@@ -24,10 +24,8 @@ export class LaunchRequestHandler implements RequestHandler {
   }
 
   async handle(input: HandlerInput): Promise<Response> {
-    console.log('hello');
-    await this.podcastManager.fetchPodcasts();
-    console.log('hello2', this.podcastManager);
-    if (!this.podcastManager.hasFetchedPodcastsSuccessfully()) {
+    const podcasts = await this.podcastManager.fetchPodcasts();
+    if (!Boolean(podcasts)) {
       return input.responseBuilder.speak(t(input, 'ERROR_MSG')).getResponse();
     }
 

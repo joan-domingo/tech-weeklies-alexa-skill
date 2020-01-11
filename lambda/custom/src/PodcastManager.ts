@@ -6,7 +6,8 @@ import {
   determineEpisodeFromIndex,
   getPodcastMetadata
 } from './util/podcastUtil';
-import { t } from './util/attributesUtil';
+import { saveListenedPodcastEpisode, t } from './util/attributesUtil';
+import { PersistentAttributes } from './model/attributesModel';
 
 export class PodcastManager {
   private podcasts: Podcast[] | null | undefined = undefined;
@@ -18,12 +19,11 @@ export class PodcastManager {
     this.parser = new Parser();
   }
 
-  public async fetchPodcasts(): Promise<void> {
+  public async fetchPodcasts(): Promise<Podcast[] | null> {
     return new Promise(resolve => {
       this.parser.parseURL(
         'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
         (err: Error, feed: Parser.Output) => {
-          console.log('output', err, feed);
           if (err) {
             this.podcasts = null;
           } else {
@@ -31,7 +31,7 @@ export class PodcastManager {
               item.enclosure.type.includes('audio')
             );
           }
-          resolve();
+          resolve(this.podcasts);
         }
       );
     });
@@ -47,22 +47,29 @@ export class PodcastManager {
     }
   }
 
-  public playRandomPodcast(
+  public async playRandomPodcast(
     input: HandlerInput,
-    callback: (episode: number) => void
-  ): Response | Promise<Response> {
+    persistentAttributes: PersistentAttributes
+  ): Promise<Response> {
     const randomIndex = Math.floor(Math.random() * this.podcasts!.length - 1);
     const episode = determineEpisodeFromIndex(randomIndex, this.podcasts!);
-    callback(episode);
+
+    await saveListenedPodcastEpisode(episode, persistentAttributes, input);
+
     return this.playPodcast(input, randomIndex);
   }
 
-  public playLatestPodcast(
+  public async playLatestPodcast(
     input: HandlerInput,
-    callback: (episode: number) => void
-  ): Response | Promise<Response> {
+    persistentAttributes: PersistentAttributes
+  ): Promise<Response> {
     const latestPodastIndex = 0;
-    callback(latestPodastIndex);
+    const episode = determineEpisodeFromIndex(
+      latestPodastIndex,
+      this.podcasts!
+    );
+    await saveListenedPodcastEpisode(episode, persistentAttributes, input);
+
     return this.playPodcast(input, latestPodastIndex);
   }
 
@@ -75,7 +82,7 @@ export class PodcastManager {
         .addAudioPlayerPlayDirective(
           'REPLACE_ALL',
           podcast.enclosure.url,
-          podcast.episode.toString(),
+          podcast.itunes.episode.toString(),
           0,
           undefined,
           getPodcastMetadata(podcast)
@@ -95,11 +102,7 @@ export class PodcastManager {
       .getResponse();
   }
 
-  public hasFetchedPodcastsSuccessfully() {
-    return Boolean(this.podcasts);
-  }
-
   hasUserListenedToLatestPodcast(listenedPodcastsTokens: number[]) {
-    return listenedPodcastsTokens.includes(this.podcasts![0].episode);
+    return listenedPodcastsTokens.includes(this.podcasts![0].itunes.episode);
   }
 }

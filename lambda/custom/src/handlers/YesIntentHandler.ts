@@ -8,7 +8,6 @@ import { Response } from 'ask-sdk-model';
 import {
   getPersistentAttributes,
   getSessionAttributes,
-  saveListenedPodcastEpisode,
   setSessionAttributes,
   t
 } from '../util/attributesUtil';
@@ -39,12 +38,14 @@ export class YesIntentHandler implements RequestHandler {
 
     switch (sessionAttributes.askedQuestionKey) {
       case 'PLAY_RANDOM_PODCAST_QUESTION':
-        return this.podcastManager.playRandomPodcast(input, episode =>
-          saveListenedPodcastEpisode(episode, persistentAttributes, input)
+        return this.podcastManager.playRandomPodcast(
+          input,
+          persistentAttributes
         );
       case 'PLAY_LATEST_PODCAST_QUESTION':
-        return this.podcastManager.playLatestPodcast(input, episode =>
-          saveListenedPodcastEpisode(episode, persistentAttributes, input)
+        return this.podcastManager.playLatestPodcast(
+          input,
+          persistentAttributes
         );
       case 'RESUME_PODCAST_QUESTION':
       default:
