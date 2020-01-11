@@ -13,30 +13,34 @@
                     "name": "AMAZON.StopIntent"
                 },
                 {
-                    "name": "PlayPodcastIntent",
+                    "name": "PlayLatestPodcastIntent",
                     "samples": [
-                        "start",
-                        "begin",
+                        "play latest podcast",
+                        "play the latest",
+                        "play the latest podcast",
+                        "begin the latest podcast",
+                        "begin playing the latest podcast",
+                        "start latest podcast",
+                        "start the latest podcast",
+                        "start playing the latest podcast"
+                    ]
+                },
+                {
+                    "name": "PlayRandomPodcastIntent",
+                    "samples": [
                         "play anything",
                         "play something",
-                        "play podcast",
+                        "play random podcast",
+                        "play a random one",
                         "play a podcast",
-                        "play the latest podcast",
                         "begin podcast",
-                        "begin the podcast",
-                        "begin playing the podcast",
+                        "begin playing a podcast",
                         "start podcast",
-                        "start the podcast",
-                        "start playing the podcast",
-                        "play the podcast",
-                        "to play",
-                        "to begin podcast",
-                        "to begin the podcast",
-                        "to begin playing the podcast",
-                        "to start podcast",
-                        "to start the podcast",
-                        "to start playing the podcast",
-                        "to play the podcast"
+                        "start a podcast",
+                        "start playing a podcast",
+                        "start a random podcast",
+                        "play any podcast",
+                        "start any podcast"
                     ]
                 },
                 {

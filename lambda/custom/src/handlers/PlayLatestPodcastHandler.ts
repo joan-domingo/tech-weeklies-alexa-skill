@@ -7,7 +7,7 @@ import {
 import { Response } from 'ask-sdk-model';
 import { PodcastManager } from '../PodcastManager';
 
-export class PlayPodcastHandler implements RequestHandler {
+export class PlayLatestPodcastHandler implements RequestHandler {
   private podcastManager: PodcastManager;
 
   constructor(podcastManager: PodcastManager) {
@@ -17,11 +17,14 @@ export class PlayPodcastHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
     return (
       getRequestType(input.requestEnvelope) === 'IntentRequest' &&
-      getIntentName(input.requestEnvelope) === 'PlayPodcastIntent'
+      getIntentName(input.requestEnvelope) === 'PlayLatestPodcastIntent'
     );
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    return this.podcastManager.playCurrentPodcast(input, 'playing podcast...');
+    return this.podcastManager.playCurrentPodcast(
+      input,
+      'playing latest podcast...'
+    );
   }
 }
