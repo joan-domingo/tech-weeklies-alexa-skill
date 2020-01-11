@@ -4,7 +4,8 @@ import { HandlerInput } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
 import {
   determineEpisodeFromIndex,
-  getPodcastMetadata
+  getPodcastMetadata,
+  getRandomPodcastIndex
 } from './util/podcastUtil';
 import { saveListenedPodcastEpisode, t } from './util/attributesUtil';
 import { PersistentAttributes } from './model/attributesModel';
@@ -51,7 +52,10 @@ export class PodcastManager {
     input: HandlerInput,
     persistentAttributes: PersistentAttributes
   ): Promise<Response> {
-    const randomIndex = Math.floor(Math.random() * this.podcasts!.length - 1);
+    const randomIndex = getRandomPodcastIndex(
+      this.podcasts!,
+      persistentAttributes?.activity?.playedPodcastEpisodes || []
+    );
     const episode = determineEpisodeFromIndex(randomIndex, this.podcasts!);
 
     await saveListenedPodcastEpisode(episode, persistentAttributes, input);

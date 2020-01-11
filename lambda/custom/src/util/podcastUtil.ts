@@ -21,3 +21,14 @@ export function determineEpisodeFromIndex(
 ): number {
   return podcasts[index].itunes.episode;
 }
+
+export function getRandomPodcastIndex(
+  podcasts: Podcast[],
+  excludedEpisodes: number[]
+): number {
+  const index = Math.floor(Math.random() * podcasts.length);
+  const episode = determineEpisodeFromIndex(index, podcasts);
+  return excludedEpisodes.includes(episode)
+    ? getRandomPodcastIndex(podcasts, excludedEpisodes)
+    : index;
+}
