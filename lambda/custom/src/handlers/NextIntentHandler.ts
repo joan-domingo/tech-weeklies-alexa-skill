@@ -31,7 +31,7 @@ export class NextIntentHandler implements RequestHandler {
       .addAudioPlayerPlayDirective(
         'REPLACE_ALL',
         podcast.enclosure.url,
-        podcast.guid,
+        podcast.episode,
         0,
         undefined,
         getPodcastMetadata(podcast)

@@ -42,5 +42,11 @@ export async function setAndSavePersistentAttributes(
 }
 
 export function isUserOnboarded(attrs: PersistentAttributes): boolean {
-  return attrs.profile && attrs.profile.isFirstTimeOnboarded;
+  return attrs.profile ? attrs.profile.isFirstTimeOnboarded : false;
+}
+
+export function getListenedPodcastsTokens(
+  attrs: PersistentAttributes
+): string[] {
+  return attrs.activity ? attrs.activity.playedPodcastEpisodes : [];
 }

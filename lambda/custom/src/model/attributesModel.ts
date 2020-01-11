@@ -1,10 +1,13 @@
 export interface PersistentAttributes {
-  profile: {
+  profile?: {
     isFirstTimeOnboarded: boolean;
+  };
+  activity?: {
+    playedPodcastEpisodes: string[];
   };
 }
 
 export interface SessionAttributes {
   isWaitingForAnAnswer: boolean;
-  askedQuestionKey: string;
+  askedQuestionKey: string | undefined;
 }

@@ -23,7 +23,7 @@ function buildLambdaSkill(): LambdaHandler {
 
   return SkillBuilders.standard()
     .addRequestHandlers(
-      new LaunchRequestHandler(),
+      new LaunchRequestHandler(podcastManager),
       new HelpIntentHandler(),
       new SessionEndedRequestHandler(),
       new YesIntentHandler(podcastManager),

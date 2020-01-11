@@ -17,6 +17,7 @@ export class CancelAndStopIntentHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
+    console.log(JSON.stringify(input));
     const speakOutput = 'See you later, alligator!';
 
     return input.responseBuilder

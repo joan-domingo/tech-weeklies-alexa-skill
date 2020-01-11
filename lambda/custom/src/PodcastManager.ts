@@ -15,18 +15,15 @@ export class PodcastManager {
     this.parser = new Parser();
   }
 
-  public fetchPodcasts(callback: (podcasts: Podcast[] | null) => void) {
+  public async fetchPodcasts(): Promise<void> {
     this.parser.parseURL(
       'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
       (err: Error, feed: Parser.Output) => {
         if (err) {
-          callback(null);
+          this.podcasts = null;
         } else {
-          const podcasts = feed.items as Podcast[];
-          callback(
-            podcasts.filter((item: Podcast) =>
-              item.enclosure.type.includes('audio')
-            )
+          this.podcasts = (feed.items as Podcast[]).filter((item: Podcast) =>
+            item.enclosure.type.includes('audio')
           );
         }
       }
@@ -44,38 +41,14 @@ export class PodcastManager {
   }
 
   public playRandomPodcast(input: HandlerInput): Response | Promise<Response> {
-    if (this.podcasts === undefined) {
-      return new Promise(resolve => {
-        this.fetchPodcasts(podcasts => {
-          // TODO undefined podcasts value
-          this.podcasts = podcasts;
-          resolve(
-            this.playPodcast(
-              input,
-              Math.floor(Math.random() * podcasts!.length - 1)
-            )
-          );
-        });
-      });
-    } else {
-      return this.playPodcast(
-        input,
-        Math.floor(Math.random() * this.podcasts!.length - 1)
-      );
-    }
+    return this.playPodcast(
+      input,
+      Math.floor(Math.random() * this.podcasts!.length - 1)
+    );
   }
 
   public playLatestPodcast(input: HandlerInput): Response | Promise<Response> {
-    if (this.podcasts === undefined) {
-      return new Promise(resolve => {
-        this.fetchPodcasts(podcasts => {
-          this.podcasts = podcasts;
-          resolve(this.playPodcast(input, 0));
-        });
-      });
-    } else {
-      return this.playPodcast(input, 0);
-    }
+    return this.playPodcast(input, 0);
   }
 
   private playPodcast(input: HandlerInput, index: number): Response {
@@ -87,7 +60,7 @@ export class PodcastManager {
         .addAudioPlayerPlayDirective(
           'REPLACE_ALL',
           podcast.enclosure.url,
-          podcast.guid,
+          podcast.episode,
           0,
           undefined,
           getPodcastMetadata(podcast)
@@ -105,5 +78,13 @@ export class PodcastManager {
       .speak(input.attributesManager.getRequestAttributes().t('GOODBYE_MSG'))
       .withShouldEndSession(true)
       .getResponse();
+  }
+
+  public hasFetchedPodcastsSuccessfully() {
+    return Boolean(this.podcasts);
+  }
+
+  hasUserListenedToLatestPodcast(listenedPodcastsTokens: string[]) {
+    return listenedPodcastsTokens.includes(this.podcasts![0].episode);
   }
 }
