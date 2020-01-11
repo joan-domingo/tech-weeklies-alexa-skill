@@ -3,6 +3,7 @@ import { Podcast } from './model/podcastModel';
 import { HandlerInput } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
 import { getPodcastMetadata } from './util/podcastUtil';
+import { t } from './util/attributesUtil';
 
 export class PodcastManager {
   private podcasts: Podcast[] | null | undefined = undefined;
@@ -32,20 +33,6 @@ export class PodcastManager {
     );
   }
 
-  public async getCurrentPodcast() {
-    if (this.podcasts === undefined) {
-      await this.fetchPodcasts(podcasts => {
-        console.log('fetched podcasts: ', podcasts);
-        this.podcasts = podcasts;
-        if (podcasts === null) {
-          return null;
-        }
-        return podcasts[this.podcastIndex];
-      });
-    }
-    return this.podcasts![this.podcastIndex];
-  }
-
   public getNextPodcast() {
     if (this.podcasts !== null) {
       this.podcastIndex++;
@@ -56,27 +43,47 @@ export class PodcastManager {
     }
   }
 
-  public playCurrentPodcast(
-    input: HandlerInput,
-    speakOutputKey: string
-  ): Response | Promise<Response> {
+  public playRandomPodcast(input: HandlerInput): Response | Promise<Response> {
+    if (this.podcasts === undefined) {
+      return new Promise(resolve => {
+        this.fetchPodcasts(podcasts => {
+          // TODO undefined podcasts value
+          this.podcasts = podcasts;
+          resolve(
+            this.playPodcast(
+              input,
+              Math.floor(Math.random() * podcasts!.length - 1)
+            )
+          );
+        });
+      });
+    } else {
+      return this.playPodcast(
+        input,
+        Math.floor(Math.random() * this.podcasts!.length - 1)
+      );
+    }
+  }
+
+  public playLatestPodcast(input: HandlerInput): Response | Promise<Response> {
     if (this.podcasts === undefined) {
       return new Promise(resolve => {
         this.fetchPodcasts(podcasts => {
           this.podcasts = podcasts;
-          resolve(this.playPodcast(input, speakOutputKey));
+          resolve(this.playPodcast(input, 0));
         });
       });
     } else {
-      return this.playPodcast(input, speakOutputKey);
+      return this.playPodcast(input, 0);
     }
   }
 
-  private playPodcast(input: HandlerInput, speakOutputKey: string): Response {
+  private playPodcast(input: HandlerInput, index: number): Response {
     if (this.podcasts) {
-      const podcast = this.podcasts[this.podcastIndex];
+      const podcast = this.podcasts[index];
+      const speakOutput = `${t(input, 'PLAYING')} ${podcast.title}`;
       return input.responseBuilder
-        .speak(input.attributesManager.getRequestAttributes().t(speakOutputKey))
+        .speak(speakOutput)
         .addAudioPlayerPlayDirective(
           'REPLACE_ALL',
           podcast.enclosure.url,

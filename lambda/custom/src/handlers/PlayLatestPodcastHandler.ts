@@ -22,9 +22,6 @@ export class PlayLatestPodcastHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    return this.podcastManager.playCurrentPodcast(
-      input,
-      'playing latest podcast...'
-    );
+    return this.podcastManager.playLatestPodcast(input);
   }
 }

@@ -22,9 +22,6 @@ export class PlayRandomPodcastHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    return this.podcastManager.playCurrentPodcast(
-      input,
-      'playing random podcast...'
-    );
+    return this.podcastManager.playRandomPodcast(input);
   }
 }
