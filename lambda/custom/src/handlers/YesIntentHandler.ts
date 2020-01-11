@@ -5,7 +5,13 @@ import {
   RequestHandler
 } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
-import { getSessionAttributes, t } from '../util/attributesUtil';
+import {
+  getPersistentAttributes,
+  getSessionAttributes,
+  saveListenedPodcastEpisode,
+  setSessionAttributes,
+  t
+} from '../util/attributesUtil';
 import { PodcastManager } from '../PodcastManager';
 
 export class YesIntentHandler implements RequestHandler {
@@ -24,14 +30,22 @@ export class YesIntentHandler implements RequestHandler {
     );
   }
 
-  handle(input: HandlerInput): Promise<Response> | Response {
+  async handle(input: HandlerInput): Promise<Response> {
+    const persistentAttributes = await getPersistentAttributes(input);
     const sessionAttributes = getSessionAttributes(input);
+
+    sessionAttributes.isWaitingForAnAnswer = false;
+    setSessionAttributes(input, sessionAttributes);
 
     switch (sessionAttributes.askedQuestionKey) {
       case 'PLAY_RANDOM_PODCAST_QUESTION':
-        return this.podcastManager.playRandomPodcast(input);
+        return this.podcastManager.playRandomPodcast(input, episode =>
+          saveListenedPodcastEpisode(episode, persistentAttributes, input)
+        );
       case 'PLAY_LATEST_PODCAST_QUESTION':
-        return this.podcastManager.playLatestPodcast(input);
+        return this.podcastManager.playLatestPodcast(input, episode =>
+          saveListenedPodcastEpisode(episode, persistentAttributes, input)
+        );
       case 'RESUME_PODCAST_QUESTION':
       default:
         return input.responseBuilder

@@ -2,7 +2,7 @@ export interface Podcast {
   title: string;
   itunes: Itunes;
   enclosure: Enclosure;
-  episode: string;
+  episode: number;
 }
 
 export interface Itunes {

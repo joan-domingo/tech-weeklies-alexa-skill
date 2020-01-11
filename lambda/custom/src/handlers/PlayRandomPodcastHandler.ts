@@ -6,6 +6,10 @@ import {
 } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
 import { PodcastManager } from '../PodcastManager';
+import {
+  getPersistentAttributes,
+  saveListenedPodcastEpisode
+} from '../util/attributesUtil';
 
 export class PlayRandomPodcastHandler implements RequestHandler {
   private podcastManager: PodcastManager;
@@ -21,7 +25,11 @@ export class PlayRandomPodcastHandler implements RequestHandler {
     );
   }
 
-  handle(input: HandlerInput): Promise<Response> | Response {
-    return this.podcastManager.playRandomPodcast(input);
+  async handle(input: HandlerInput): Promise<Response> {
+    const persistentAttributes = await getPersistentAttributes(input);
+
+    return this.podcastManager.playRandomPodcast(input, episode =>
+      saveListenedPodcastEpisode(episode, persistentAttributes, input)
+    );
   }
 }

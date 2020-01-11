@@ -2,7 +2,10 @@ import * as Parser from 'rss-parser';
 import { Podcast } from './model/podcastModel';
 import { HandlerInput } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
-import { getPodcastMetadata } from './util/podcastUtil';
+import {
+  determineEpisodeFromIndex,
+  getPodcastMetadata
+} from './util/podcastUtil';
 import { t } from './util/attributesUtil';
 
 export class PodcastManager {
@@ -40,15 +43,23 @@ export class PodcastManager {
     }
   }
 
-  public playRandomPodcast(input: HandlerInput): Response | Promise<Response> {
-    return this.playPodcast(
-      input,
-      Math.floor(Math.random() * this.podcasts!.length - 1)
-    );
+  public playRandomPodcast(
+    input: HandlerInput,
+    callback: (episode: number) => void
+  ): Response | Promise<Response> {
+    const randomIndex = Math.floor(Math.random() * this.podcasts!.length - 1);
+    const episode = determineEpisodeFromIndex(randomIndex, this.podcasts!);
+    callback(episode);
+    return this.playPodcast(input, randomIndex);
   }
 
-  public playLatestPodcast(input: HandlerInput): Response | Promise<Response> {
-    return this.playPodcast(input, 0);
+  public playLatestPodcast(
+    input: HandlerInput,
+    callback: (episode: number) => void
+  ): Response | Promise<Response> {
+    const latestPodastIndex = 0;
+    callback(latestPodastIndex);
+    return this.playPodcast(input, latestPodastIndex);
   }
 
   private playPodcast(input: HandlerInput, index: number): Response {
@@ -60,7 +71,7 @@ export class PodcastManager {
         .addAudioPlayerPlayDirective(
           'REPLACE_ALL',
           podcast.enclosure.url,
-          podcast.episode,
+          podcast.episode.toString(),
           0,
           undefined,
           getPodcastMetadata(podcast)
@@ -84,7 +95,7 @@ export class PodcastManager {
     return Boolean(this.podcasts);
   }
 
-  hasUserListenedToLatestPodcast(listenedPodcastsTokens: string[]) {
+  hasUserListenedToLatestPodcast(listenedPodcastsTokens: number[]) {
     return listenedPodcastsTokens.includes(this.podcasts![0].episode);
   }
 }

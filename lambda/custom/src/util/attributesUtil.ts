@@ -47,6 +47,22 @@ export function isUserOnboarded(attrs: PersistentAttributes): boolean {
 
 export function getListenedPodcastsTokens(
   attrs: PersistentAttributes
-): string[] {
+): number[] {
   return attrs.activity ? attrs.activity.playedPodcastEpisodes : [];
+}
+
+export async function saveListenedPodcastEpisode(
+  episode: number,
+  persistentAttributes: PersistentAttributes,
+  handlerInput: HandlerInput
+): Promise<void> {
+  const newValue = persistentAttributes.activity?.playedPodcastEpisodes || [];
+  newValue.push(episode);
+
+  persistentAttributes.activity = {
+    ...persistentAttributes.activity,
+    playedPodcastEpisodes: newValue
+  };
+
+  await setAndSavePersistentAttributes(handlerInput, persistentAttributes);
 }

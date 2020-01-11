@@ -14,3 +14,10 @@ export function getPodcastMetadata(podcast: Podcast): AudioItemMetadata {
     }
   };
 }
+
+export function determineEpisodeFromIndex(
+  randomIndex: number,
+  podcasts: Podcast[]
+): number {
+  return podcasts[randomIndex].episode;
+}

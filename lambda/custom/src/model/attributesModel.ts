@@ -3,7 +3,7 @@ export interface PersistentAttributes {
     isFirstTimeOnboarded: boolean;
   };
   activity?: {
-    playedPodcastEpisodes: string[];
+    playedPodcastEpisodes: number[];
   };
 }
 
