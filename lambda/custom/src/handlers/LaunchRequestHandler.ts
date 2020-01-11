@@ -2,8 +2,10 @@ import { getRequestType, HandlerInput, RequestHandler } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
 import {
   getPersistentAttributes,
+  getSessionAttributes,
   isUserOnboarded,
   setAndSavePersistentAttributes,
+  setSessionAttributes,
   t
 } from '../util/attributesUtil';
 import { PersistentAttributes } from '../model/attributesModel';
@@ -41,9 +43,14 @@ export class LaunchRequestHandler implements RequestHandler {
   }
 
   private determineOutputQuestion(isOnboarded: boolean, input: HandlerInput) {
-    return isOnboarded
-      ? t(input, this.determineOutputQuestionKey())
-      : t(input, 'HELP_MSG');
+    const outputQuestionKey = this.determineOutputQuestionKey();
+    const sessionAttributes = getSessionAttributes(input);
+
+    sessionAttributes.isWaitingForAnAnswer = true;
+    sessionAttributes.askedQuestionKey = outputQuestionKey;
+    setSessionAttributes(input, sessionAttributes);
+
+    return isOnboarded ? t(input, outputQuestionKey) : t(input, 'HELP_MSG');
   }
 
   private determineOutputQuestionKey() {

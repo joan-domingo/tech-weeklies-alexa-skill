@@ -18,6 +18,13 @@ export function getSessionAttributes(handlerInput: HandlerInput) {
   >();
 }
 
+export function setSessionAttributes(
+  handlerInput: HandlerInput,
+  sessionAttributes: SessionAttributes
+) {
+  handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+}
+
 /** PERSISTENT UTILS */
 
 export async function getPersistentAttributes(

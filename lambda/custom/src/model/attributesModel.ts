@@ -4,4 +4,7 @@ export interface PersistentAttributes {
   };
 }
 
-export interface SessionAttributes {}
+export interface SessionAttributes {
+  isWaitingForAnAnswer: boolean;
+  askedQuestionKey: string;
+}

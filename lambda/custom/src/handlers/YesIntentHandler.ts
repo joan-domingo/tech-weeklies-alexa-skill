@@ -5,51 +5,38 @@ import {
   RequestHandler
 } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
+import { getSessionAttributes, t } from '../util/attributesUtil';
+import { PodcastManager } from '../PodcastManager';
 
 export class YesIntentHandler implements RequestHandler {
+  private podcastManager: PodcastManager;
+
+  constructor(podcastManager: PodcastManager) {
+    this.podcastManager = podcastManager;
+  }
+
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
+    const sessionAttributes = getSessionAttributes(input);
     return (
       getRequestType(input.requestEnvelope) === 'IntentRequest' &&
-      getIntentName(input.requestEnvelope) === 'AMAZON.YesIntent'
+      getIntentName(input.requestEnvelope) === 'AMAZON.YesIntent' &&
+      sessionAttributes.isWaitingForAnAnswer
     );
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    // const attributesManager = input.attributesManager;
-    // const sessionAttributes = attributesManager.getSessionAttributes();
+    const sessionAttributes = getSessionAttributes(input);
 
-    /*if (sessionAttributes.isWaitingForWelcomeAnswer === true) {
-      sessionAttributes.isWaitingForWelcomeAnswer = false;
-      attributesManager.setSessionAttributes(sessionAttributes);
-
-      const podcast = this.podcastManager.getCurrentPodcast()!;
-      const speakOutput = 'playing podcast...';
-
-      return input.responseBuilder
-        .speak(speakOutput)
-        .addAudioPlayerPlayDirective(
-          'REPLACE_ALL',
-          podcast.enclosure.url,
-          podcast.guid,
-          0,
-          undefined,
-          getPodcastMetadata(podcast)
-        )
-        .withStandardCard(
-          podcast.title,
-          podcast.itunes.summary,
-          podcast.itunes.image,
-          podcast.itunes.image
-        )
-        .withShouldEndSession(true)
-        .getResponse();
-    }*/
-
-    const speakOutput = "sorry the podcast isn't available";
-
-    return input.responseBuilder
-      .speak(speakOutput)
-      .reprompt(speakOutput)
-      .getResponse();
+    switch (sessionAttributes.askedQuestionKey) {
+      case 'PLAY_RANDOM_PODCAST_QUESTION':
+        return this.podcastManager.playRandomPodcast(input);
+      case 'PLAY_LATEST_PODCAST_QUESTION':
+        return this.podcastManager.playLatestPodcast(input);
+      case 'RESUME_PODCAST_QUESTION':
+      default:
+        return input.responseBuilder
+          .speak(t(input, 'FORGOT_QUESTION'))
+          .getResponse();
+    }
   }
 }
