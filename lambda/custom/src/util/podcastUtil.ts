@@ -26,7 +26,13 @@ export function getRandomPodcastIndex(
   podcasts: Podcast[],
   excludedEpisodes: number[]
 ): number {
+  const uniqueExcludedEpisodes = excludedEpisodes.filter(
+    (x, i, a) => a.indexOf(x) == i
+  );
   const index = Math.floor(Math.random() * podcasts.length);
+  if (uniqueExcludedEpisodes.length === podcasts.length) {
+    return index;
+  }
   const episode = determineEpisodeFromIndex(index, podcasts);
   return excludedEpisodes.includes(episode)
     ? getRandomPodcastIndex(podcasts, excludedEpisodes)
