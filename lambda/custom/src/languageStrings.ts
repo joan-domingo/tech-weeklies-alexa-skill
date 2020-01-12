@@ -17,6 +17,7 @@ export const languageStrings = {
       PLAY_RANDOM_PODCAST_QUESTION:
         'Would you like to listen to a random podcast?',
       PLAYING: 'Playing podcast:',
+      RESUMING: 'Resuming podcast:',
       HELP_MSG:
         'Ask me to play the latest podcast or a random one. What would you like to do?',
       GOODBYE_MSG: 'See you later alligater!',

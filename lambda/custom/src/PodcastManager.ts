@@ -94,8 +94,9 @@ export class PodcastManager {
   ): Promise<Response> {
     const { offset, episode } = getPausedPodastEpisode(persistentAttributes);
     const pausedIndex = determineIndexFromEpisode(episode, this.podcasts!);
-    console.log('paused index', pausedIndex);
+
     await deletePausedPodcastEpisode(persistentAttributes, input);
+
     return this.playPodcast(input, pausedIndex, offset);
   }
 
@@ -104,30 +105,28 @@ export class PodcastManager {
     index: number,
     offset: number = 0
   ): Response {
-    if (this.podcasts) {
-      const podcast = this.podcasts[index];
-      const speakOutput = `${t(input, 'PLAYING')} ${podcast.title}`;
-      return input.responseBuilder
-        .speak(speakOutput)
-        .addAudioPlayerPlayDirective(
-          'REPLACE_ALL',
-          podcast.enclosure.url,
-          podcast.itunes.episode.toString(),
-          offset,
-          undefined,
-          getPodcastMetadata(podcast)
-        )
-        .withStandardCard(
-          podcast.title,
-          podcast.itunes.summary,
-          podcast.itunes.image,
-          podcast.itunes.image
-        )
-        .withShouldEndSession(true)
-        .getResponse();
-    }
+    const podcast = this.podcasts![index];
+    const speakOutput =
+      offset > 0
+        ? `${t(input, 'PLAYING')} ${podcast.title}`
+        : `${t(input, 'RESUMING')} ${podcast.title}`;
+
     return input.responseBuilder
-      .speak(input.attributesManager.getRequestAttributes().t('GOODBYE_MSG'))
+      .speak(speakOutput)
+      .addAudioPlayerPlayDirective(
+        'REPLACE_ALL',
+        podcast.enclosure.url,
+        podcast.itunes.episode.toString(),
+        offset,
+        undefined,
+        getPodcastMetadata(podcast)
+      )
+      .withStandardCard(
+        podcast.title,
+        podcast.itunes.summary,
+        podcast.itunes.image,
+        podcast.itunes.image
+      )
       .withShouldEndSession(true)
       .getResponse();
   }
