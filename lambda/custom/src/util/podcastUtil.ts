@@ -26,7 +26,9 @@ export function determineIndexFromEpisode(
   episode: number,
   podcasts: Podcast[]
 ): number {
-  return podcasts.findIndex(value => value.itunes.episode === episode);
+  return podcasts.findIndex(
+    value => value.itunes.episode.toString() === episode.toString()
+  );
 }
 
 export function getRandomPodcastIndex(

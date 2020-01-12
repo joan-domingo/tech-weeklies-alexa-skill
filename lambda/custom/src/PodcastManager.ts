@@ -93,7 +93,6 @@ export class PodcastManager {
     persistentAttributes: PersistentAttributes
   ): Promise<Response> {
     const { offset, episode } = getPausedPodastEpisode(persistentAttributes);
-    console.log('paused podcast', offset, episode);
     const pausedIndex = determineIndexFromEpisode(episode, this.podcasts!);
     console.log('paused index', pausedIndex);
     await deletePausedPodcastEpisode(persistentAttributes, input);
