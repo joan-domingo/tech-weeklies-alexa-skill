@@ -22,19 +22,25 @@ export class PodcastManager {
 
   public async fetchPodcasts(): Promise<Podcast[] | null> {
     return new Promise(resolve => {
-      this.parser.parseURL(
-        'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
-        (err: Error, feed: Parser.Output) => {
-          if (err) {
-            this.podcasts = null;
-          } else {
-            this.podcasts = (feed.items as Podcast[]).filter((item: Podcast) =>
-              item.enclosure.type.includes('audio')
-            );
+      if (Boolean(this.podcasts)) {
+        console.log('hello1');
+        resolve(this.podcasts);
+      } else {
+        this.parser.parseURL(
+          'https://feed.podbean.com/techweeklies-podcast.futurice.com/feed.xml',
+          (err: Error, feed: Parser.Output) => {
+            if (err) {
+              this.podcasts = null;
+            } else {
+              this.podcasts = (feed.items as Podcast[]).filter(
+                (item: Podcast) => item.enclosure.type.includes('audio')
+              );
+            }
+            console.log('hello2');
+            resolve(this.podcasts);
           }
-          resolve(this.podcasts);
-        }
-      );
+        );
+      }
     });
   }
 

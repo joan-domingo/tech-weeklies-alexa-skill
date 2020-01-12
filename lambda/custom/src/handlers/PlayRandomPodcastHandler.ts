@@ -23,6 +23,7 @@ export class PlayRandomPodcastHandler implements RequestHandler {
   }
 
   async handle(input: HandlerInput): Promise<Response> {
+    await this.podcastManager.fetchPodcasts();
     const persistentAttributes = await getPersistentAttributes(input);
 
     return this.podcastManager.playRandomPodcast(input, persistentAttributes);

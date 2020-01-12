@@ -24,11 +24,7 @@ export class LaunchRequestHandler implements RequestHandler {
   }
 
   async handle(input: HandlerInput): Promise<Response> {
-    const podcasts = await this.podcastManager.fetchPodcasts();
-    if (!Boolean(podcasts)) {
-      return input.responseBuilder.speak(t(input, 'ERROR_MSG')).getResponse();
-    }
-
+    await this.podcastManager.fetchPodcasts();
     const persistentAttributes = await getPersistentAttributes(input);
     const isOnboarded = isUserOnboarded(persistentAttributes);
 
