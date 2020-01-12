@@ -5,6 +5,11 @@ import {
   RequestHandler
 } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
+import {
+  getPersistentAttributes,
+  savePausedPodcastEpisode
+} from '../util/attributesUtil';
+import { PersistentAttributes } from '../model/attributesModel';
 
 export class CancelAndStopIntentHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
@@ -16,9 +21,11 @@ export class CancelAndStopIntentHandler implements RequestHandler {
     );
   }
 
-  handle(input: HandlerInput): Promise<Response> | Response {
-    console.log(JSON.stringify(input));
-    const speakOutput = 'See you later, alligator!';
+  async handle(input: HandlerInput): Promise<Response> {
+    const persistentAttributes = await getPersistentAttributes(input);
+    const speakOutput = this.determineSpeakOutput();
+
+    await this.savePausedEpisode(input, persistentAttributes);
 
     return input.responseBuilder
       .speak(speakOutput)
@@ -26,5 +33,27 @@ export class CancelAndStopIntentHandler implements RequestHandler {
       .addAudioPlayerStopDirective()
       .withShouldEndSession(true)
       .getResponse();
+  }
+
+  private async savePausedEpisode(
+    input: HandlerInput,
+    persistentAttributes: PersistentAttributes
+  ) {
+    const offset: number =
+      input.requestEnvelope.context.AudioPlayer?.offsetInMilliseconds || 0;
+    const episode: number =
+      Number(input.requestEnvelope.context.AudioPlayer?.token) || 0;
+
+    await savePausedPodcastEpisode(
+      persistentAttributes,
+      offset,
+      episode,
+      input
+    );
+  }
+
+  // TODO
+  private determineSpeakOutput() {
+    return 'See you later, alligator!';
   }
 }

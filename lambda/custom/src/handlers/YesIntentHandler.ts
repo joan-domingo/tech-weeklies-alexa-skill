@@ -48,6 +48,10 @@ export class YesIntentHandler implements RequestHandler {
           persistentAttributes
         );
       case 'RESUME_PODCAST_QUESTION':
+        return this.podcastManager.playPausedPodcast(
+          input,
+          persistentAttributes
+        );
       default:
         return input.responseBuilder
           .speak(t(input, 'FORGOT_QUESTION'))

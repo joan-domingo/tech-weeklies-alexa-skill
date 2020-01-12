@@ -4,6 +4,7 @@ import {
   getListenedPodcastsTokens,
   getPersistentAttributes,
   getSessionAttributes,
+  hasPausedPodcast,
   isUserOnboarded,
   setAndSavePersistentAttributes,
   setSessionAttributes,
@@ -78,7 +79,9 @@ export class LaunchRequestHandler implements RequestHandler {
     const listenedPodcastsTokens = getListenedPodcastsTokens(
       persistentAttributes
     );
-    if (
+    if (hasPausedPodcast(persistentAttributes)) {
+      return 'RESUME_PODCAST_QUESTION';
+    } else if (
       !this.podcastManager.hasUserListenedToLatestPodcast(
         listenedPodcastsTokens
       )

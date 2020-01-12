@@ -15,6 +15,7 @@ export class NoIntentHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
+    //TODO
     const speakOutput = 'Good for you';
 
     return input.responseBuilder

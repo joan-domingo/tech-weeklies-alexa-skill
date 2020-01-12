@@ -4,10 +4,16 @@ import { HandlerInput } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
 import {
   determineEpisodeFromIndex,
+  determineIndexFromEpisode,
   getPodcastMetadata,
   getRandomPodcastIndex
 } from './util/podcastUtil';
-import { saveListenedPodcastEpisode, t } from './util/attributesUtil';
+import {
+  deletePausedPodcastEpisode,
+  getPausedPodastEpisode,
+  saveListenedPodcastEpisode,
+  t
+} from './util/attributesUtil';
 import { PersistentAttributes } from './model/attributesModel';
 
 export class PodcastManager {
@@ -23,7 +29,6 @@ export class PodcastManager {
   public async fetchPodcasts(): Promise<Podcast[] | null> {
     return new Promise(resolve => {
       if (Boolean(this.podcasts)) {
-        console.log('hello1');
         resolve(this.podcasts);
       } else {
         this.parser.parseURL(
@@ -36,7 +41,6 @@ export class PodcastManager {
                 (item: Podcast) => item.enclosure.type.includes('audio')
               );
             }
-            console.log('hello2');
             resolve(this.podcasts);
           }
         );
@@ -44,6 +48,7 @@ export class PodcastManager {
     });
   }
 
+  // TODO
   public getNextPodcast() {
     if (this.podcasts !== null) {
       this.podcastIndex++;
@@ -83,7 +88,23 @@ export class PodcastManager {
     return this.playPodcast(input, latestPodastIndex);
   }
 
-  private playPodcast(input: HandlerInput, index: number): Response {
+  public async playPausedPodcast(
+    input: HandlerInput,
+    persistentAttributes: PersistentAttributes
+  ): Promise<Response> {
+    const { offset, episode } = getPausedPodastEpisode(persistentAttributes);
+    console.log('paused podcast', offset, episode);
+    const pausedIndex = determineIndexFromEpisode(episode, this.podcasts!);
+    console.log('paused index', pausedIndex);
+    await deletePausedPodcastEpisode(persistentAttributes, input);
+    return this.playPodcast(input, pausedIndex, offset);
+  }
+
+  private playPodcast(
+    input: HandlerInput,
+    index: number,
+    offset: number = 0
+  ): Response {
     if (this.podcasts) {
       const podcast = this.podcasts[index];
       const speakOutput = `${t(input, 'PLAYING')} ${podcast.title}`;
@@ -93,7 +114,7 @@ export class PodcastManager {
           'REPLACE_ALL',
           podcast.enclosure.url,
           podcast.itunes.episode.toString(),
-          0,
+          offset,
           undefined,
           getPodcastMetadata(podcast)
         )
@@ -112,7 +133,7 @@ export class PodcastManager {
       .getResponse();
   }
 
-  hasUserListenedToLatestPodcast(listenedPodcastsTokens: number[]) {
+  public hasUserListenedToLatestPodcast(listenedPodcastsTokens: number[]) {
     return listenedPodcastsTokens.includes(this.podcasts![0].itunes.episode);
   }
 }
