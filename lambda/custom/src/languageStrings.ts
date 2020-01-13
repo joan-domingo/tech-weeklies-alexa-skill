@@ -20,12 +20,19 @@ export const languageStrings = {
       RESUMING: 'Resuming podcast:',
       HELP_MSG:
         'Ask me to play the latest podcast or a random one. What would you like to do?',
-      GOODBYE_MSG: 'See you later alligater!',
       REFLECTOR_MSG: 'You just triggered {{intentName}}',
       FALLBACK_MSG: "Sorry, I don't know about that. Please try again.",
       ERROR_MSG:
         'My bad, I had trouble doing what you asked. Please try again.',
-      FORGOT_QUESTION: 'Sorry, I forgot what question I just asked you.'
+      FORGOT_QUESTION: 'Sorry, I forgot what question I just asked you.',
+      GOODBYE_MSG: {
+        1: 'See you later, alligater!',
+        2: 'In a while, crocodile!',
+        3: 'See you soon, racoon!',
+        4: 'Farewell, gazelle!',
+        5: 'Take care, brown bear!',
+        6: 'Stay loose, bull moose!'
+      }
     }
   }
 };

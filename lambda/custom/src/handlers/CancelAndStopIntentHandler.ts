@@ -7,7 +7,8 @@ import {
 import { Response } from 'ask-sdk-model';
 import {
   getPersistentAttributes,
-  savePausedPodcastEpisode
+  savePausedPodcastEpisode,
+  t
 } from '../util/attributesUtil';
 import { PersistentAttributes } from '../model/attributesModel';
 
@@ -23,7 +24,7 @@ export class CancelAndStopIntentHandler implements RequestHandler {
 
   async handle(input: HandlerInput): Promise<Response> {
     const persistentAttributes = await getPersistentAttributes(input);
-    const speakOutput = this.determineSpeakOutput();
+    const speakOutput = this.determineSpeakOutput(input);
 
     await this.savePausedEpisode(input, persistentAttributes);
 
@@ -52,8 +53,8 @@ export class CancelAndStopIntentHandler implements RequestHandler {
     );
   }
 
-  // TODO
-  private determineSpeakOutput() {
-    return 'See you later, alligator!';
+  private determineSpeakOutput(input: HandlerInput) {
+    const randomNumber = Math.floor(Math.random() * 6) + 1;
+    return t(input, `GOODBYE_MSG.${randomNumber}`);
   }
 }
