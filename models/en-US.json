@@ -54,9 +54,6 @@
                     "name": "AMAZON.PreviousIntent"
                 },
                 {
-                    "name": "AMAZON.StartOverIntent"
-                },
-                {
                     "name": "AMAZON.YesIntent"
                 },
                 {

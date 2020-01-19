@@ -5,6 +5,7 @@ import {
   RequestHandler
 } from 'ask-sdk-core';
 import { Response } from 'ask-sdk-model';
+import { t } from '../util/attributesUtil';
 
 export class HelpIntentHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
@@ -15,11 +16,11 @@ export class HelpIntentHandler implements RequestHandler {
   }
 
   handle(input: HandlerInput): Promise<Response> | Response {
-    const speakOutput = 'You can say hello to me! How can I help?';
+    const speakOutputMsg = t(input, 'HELP_MSG');
 
     return input.responseBuilder
-      .speak(speakOutput)
-      .reprompt(speakOutput)
+      .speak(speakOutputMsg)
+      .reprompt(speakOutputMsg)
       .getResponse();
   }
 }

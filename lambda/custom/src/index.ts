@@ -14,13 +14,13 @@ import { SkillBuilders } from 'ask-sdk';
 import { LambdaHandler } from 'ask-sdk-core/dist/skill/factory/BaseSkillFactory';
 import { PlayRandomPodcastHandler } from './handlers/PlayRandomPodcastHandler';
 import { PlayLatestPodcastHandler } from './handlers/PlayLatestPodcastHandler';
+import { PreviousIntentHandler } from './handlers/PreviousIntentHandler';
 
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters - they're processed top to bottom.
 function buildLambdaSkill(): LambdaHandler {
   const podcastManager = new PodcastManager();
-  // TODO StartOverIntent
 
   return SkillBuilders.standard()
     .addRequestHandlers(
@@ -32,6 +32,7 @@ function buildLambdaSkill(): LambdaHandler {
       new PlayRandomPodcastHandler(podcastManager),
       new PlayLatestPodcastHandler(podcastManager),
       new NextIntentHandler(podcastManager),
+      new PreviousIntentHandler(podcastManager),
       new CancelAndStopIntentHandler(),
       new FallbackIntentHandler(),
       new IntentReflectorHandler() // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
