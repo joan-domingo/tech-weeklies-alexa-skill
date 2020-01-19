@@ -129,17 +129,17 @@ export class PodcastManager {
   }
 
   private getNextIndex(index: number) {
-    index++;
-    if (index === this.podcasts!.length) {
-      index = 0;
+    index--;
+    if (index === -1) {
+      index = this.podcasts!.length - 1;
     }
     return index;
   }
 
   private getPrevioustIndex(index: number) {
-    index--;
-    if (index === -1) {
-      index = this.podcasts!.length - 1;
+    index++;
+    if (index === this.podcasts!.length) {
+      index = 0;
     }
     return index;
   }
