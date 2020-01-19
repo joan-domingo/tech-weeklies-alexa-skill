@@ -15,6 +15,7 @@ import { LambdaHandler } from 'ask-sdk-core/dist/skill/factory/BaseSkillFactory'
 import { PlayRandomPodcastHandler } from './handlers/PlayRandomPodcastHandler';
 import { PlayLatestPodcastHandler } from './handlers/PlayLatestPodcastHandler';
 import { PreviousIntentHandler } from './handlers/PreviousIntentHandler';
+import { ResumeIntentHandler } from './handlers/ResumeIntentHandler';
 
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -31,6 +32,7 @@ function buildLambdaSkill(): LambdaHandler {
       new NoIntentHandler(),
       new PlayRandomPodcastHandler(podcastManager),
       new PlayLatestPodcastHandler(podcastManager),
+      new ResumeIntentHandler(podcastManager),
       new NextIntentHandler(podcastManager),
       new PreviousIntentHandler(podcastManager),
       new CancelAndStopIntentHandler(),
