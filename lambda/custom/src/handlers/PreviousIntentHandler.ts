@@ -4,14 +4,14 @@ import {
   HandlerInput,
   RequestHandler
 } from 'ask-sdk-core';
-import { PodcastManager } from '../PodcastManager';
 import { Response } from 'ask-sdk-model';
+import { PodcastManager } from '../PodcastManager';
 import {
   getListenedPodcastsTokens,
   getPersistentAttributes
 } from '../util/attributesUtil';
 
-export class NextIntentHandler implements RequestHandler {
+export class PreviousIntentHandler implements RequestHandler {
   private podcastManager: PodcastManager;
 
   constructor(podcastManager: PodcastManager) {
@@ -21,7 +21,7 @@ export class NextIntentHandler implements RequestHandler {
   canHandle(input: HandlerInput): Promise<boolean> | boolean {
     return (
       getRequestType(input.requestEnvelope) === 'IntentRequest' &&
-      getIntentName(input.requestEnvelope) === 'AMAZON.NextIntent'
+      getIntentName(input.requestEnvelope) === 'AMAZON.PreviousIntent'
     );
   }
 
@@ -30,7 +30,7 @@ export class NextIntentHandler implements RequestHandler {
     const listenedEpisodes = getListenedPodcastsTokens(persistentAttributes);
     const currentEpisode = [...listenedEpisodes].pop()!;
 
-    return this.podcastManager.playNextPodcast(
+    return this.podcastManager.playPreviousPodcast(
       input,
       persistentAttributes,
       currentEpisode

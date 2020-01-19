@@ -19,10 +19,8 @@ import { PersistentAttributes } from './model/attributesModel';
 export class PodcastManager {
   private podcasts: Podcast[] | null | undefined = undefined;
   private parser: Parser;
-  private podcastIndex: number;
 
   constructor() {
-    this.podcastIndex = 0;
     this.parser = new Parser();
   }
 
@@ -46,17 +44,6 @@ export class PodcastManager {
         );
       }
     });
-  }
-
-  // TODO
-  public getNextPodcast() {
-    if (this.podcasts !== null) {
-      this.podcastIndex++;
-      if (this.podcastIndex === this.podcasts!.length) {
-        this.podcastIndex = 0;
-      }
-      return this.podcasts![this.podcastIndex];
-    }
   }
 
   public async playRandomPodcast(
@@ -100,6 +87,63 @@ export class PodcastManager {
     return this.playPodcast(input, pausedIndex, offset);
   }
 
+  public async playNextPodcast(
+    input: HandlerInput,
+    persistentAttributes: PersistentAttributes,
+    currentEpisode: number
+  ): Promise<Response> {
+    const currentIndex = determineIndexFromEpisode(
+      currentEpisode,
+      this.podcasts!
+    );
+    const nextIndex = this.getNextIndex(currentIndex);
+    const nextEpisode = determineEpisodeFromIndex(nextIndex, this.podcasts!);
+
+    await saveListenedPodcastEpisode(nextEpisode, persistentAttributes, input);
+
+    return this.playPodcast(input, nextIndex);
+  }
+
+  public async playPreviousPodcast(
+    input: HandlerInput,
+    persistentAttributes: PersistentAttributes,
+    currentEpisode: number
+  ): Promise<Response> {
+    const currentIndex = determineIndexFromEpisode(
+      currentEpisode,
+      this.podcasts!
+    );
+    const previousIndex = this.getPrevioustIndex(currentIndex);
+    const previousEpisode = determineEpisodeFromIndex(
+      previousIndex,
+      this.podcasts!
+    );
+
+    await saveListenedPodcastEpisode(
+      previousEpisode,
+      persistentAttributes,
+      input
+    );
+
+    return this.playPodcast(input, previousIndex);
+  }
+
+  private getNextIndex(index: number) {
+    index++;
+    if (index === this.podcasts!.length) {
+      index = 0;
+    }
+    return index;
+  }
+
+  private getPrevioustIndex(index: number) {
+    index--;
+    if (index === -1) {
+      index = this.podcasts!.length - 1;
+    }
+    return index;
+  }
+
   private playPodcast(
     input: HandlerInput,
     index: number,
@@ -108,8 +152,8 @@ export class PodcastManager {
     const podcast = this.podcasts![index];
     const speakOutput =
       offset > 0
-        ? `${t(input, 'PLAYING')} ${podcast.title}`
-        : `${t(input, 'RESUMING')} ${podcast.title}`;
+        ? `${t(input, 'RESUMING')} ${podcast.title}`
+        : `${t(input, 'PLAYING')} ${podcast.title}`;
 
     return input.responseBuilder
       .speak(speakOutput)
