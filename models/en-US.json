@@ -15,14 +15,14 @@
                 {
                     "name": "PlayLatestPodcastIntent",
                     "samples": [
-                        "play latest podcast",
+                        "play latest episode",
                         "play the latest",
-                        "play the latest podcast",
-                        "begin the latest podcast",
-                        "begin playing the latest podcast",
-                        "start latest podcast",
-                        "start the latest podcast",
-                        "start playing the latest podcast"
+                        "play the latest episode",
+                        "begin the latest episode",
+                        "begin playing the latest episode",
+                        "start latest episode",
+                        "start the latest episode",
+                        "start playing the latest episode"
                     ]
                 },
                 {
@@ -31,17 +31,17 @@
                         "play anything",
                         "play something",
                         "something else",
-                        "play random podcast",
+                        "play random episode",
                         "play a random one",
-                        "play a podcast",
-                        "begin podcast",
-                        "begin playing a podcast",
-                        "start podcast",
-                        "start a podcast",
-                        "start playing a podcast",
-                        "start a random podcast",
-                        "play any podcast",
-                        "start any podcast"
+                        "play a episode",
+                        "begin episode",
+                        "begin playing a episode",
+                        "start episode",
+                        "start a episode",
+                        "start playing a episode",
+                        "start a random episode",
+                        "play any episode",
+                        "start any episode"
                     ]
                 },
                 {
