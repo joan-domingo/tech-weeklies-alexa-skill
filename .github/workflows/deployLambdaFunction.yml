@@ -12,14 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Install DEV dependencies
-      run: npm install --prefix lambda/custom/
+#    - name: Install DEV dependencies
+#      run: npm install --prefix lambda/custom/
 
-    - name: Run tests
-      run: npm test --prefix lambda/custom/
+#    - name: Run tests
+#      run: npm test --prefix lambda/custom/
 
-    - name: Clean node_modules dir
-      run: rm -rf lambda/custom/node_modules
+#    - name: Clean node_modules dir
+#      run: rm -rf lambda/custom/node_modules
 
     - name: Install PROD dependencies
       run: npm install --prefix lambda/custom/ --production

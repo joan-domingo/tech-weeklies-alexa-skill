@@ -4,8 +4,7 @@
   "description": "Alexa utility for listening to Tech Weeklies podcasts",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "test": "jest"
+    "build": "tsc"
   },
   "author": "Joan Domingo Sallent",
   "license": "Apache License",
@@ -18,26 +17,6 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.1",
-    "jest": "^25.1.0",
-    "prettier": "^1.19.1",
-    "ts-jest": "^25.1.0",
-    "virtual-alexa": "^0.7.5"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "prettier": "^1.19.1"
   }
 }
