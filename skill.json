@@ -4,10 +4,12 @@
       "locales": {
         "en-US": {
           "name": "Futurice Tech Weeklies",
-          "summary": "Sample Short Description",
-          "description": "Sample Full Description",
+          "summary": "Weekly podcast where Futurice employees share their latest thoughts about tech.",
+          "description": "Weekly podcast at Futurice where developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
           "examplePhrases": [
-            "Alexa open Tech Weeklies"
+            "Alexa, open Tech Weeklies",
+            "Alexa, launch Tech Weeklies and play the latest episode",
+            "Alexa, start Tech weeklies and play an episode"
           ],
           "keywords": [
             "Futurice",
@@ -20,7 +22,7 @@
         }
       },
       "isAvailableWorldwide": true,
-      "testingInstructions": "Sample Testing Instructions.",
+      "testingInstructions": "I don't think special testing instructions are required.",
       "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },
