@@ -11,15 +11,15 @@ export const languageStrings = {
       ONBOARDING_WELCOME_MSG: 'Welcome to Futurice Tech Weeklies.',
       WELCOME_MSG: 'Welcome back.',
       RESUME_PODCAST_QUESTION:
-        'Would you like to resume the podcast you were listening to?',
+        'Would you like to resume the episode you were listening to?',
       PLAY_LATEST_PODCAST_QUESTION:
-        'Would you like to listen to the latest podcast?',
+        'Would you like to listen to the latest episode?',
       PLAY_RANDOM_PODCAST_QUESTION:
-        'Would you like to listen to a random podcast?',
-      PLAYING: 'Playing podcast:',
-      RESUMING: 'Resuming podcast:',
+        'Would you like to listen to a random episode?',
+      PLAYING: 'Playing episode:',
+      RESUMING: 'Resuming episode:',
       HELP_MSG:
-        'Ask me to play the latest podcast or a random one. What would you like to do?',
+        'Ask me to play the latest episode or a random one. What would you like to do?',
       REFLECTOR_MSG: 'You just triggered {{intentName}}',
       FALLBACK_MSG: "Sorry, I don't know about that. Please try again.",
       ERROR_MSG:
