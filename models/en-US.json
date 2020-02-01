@@ -22,7 +22,9 @@
                         "begin playing the latest episode",
                         "start latest episode",
                         "start the latest episode",
-                        "start playing the latest episode"
+                        "start playing the latest episode",
+                        "and play the latest episode",
+                        "to play the latest episode"
                     ]
                 },
                 {
@@ -41,7 +43,9 @@
                         "start playing a episode",
                         "start a random episode",
                         "play any episode",
-                        "start any episode"
+                        "start any episode",
+                        "to play an episode",
+                        "and play a random episode"
                     ]
                 },
                 {
