@@ -1,0 +1,76 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "tech weeklies",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent"
+                },
+                {
+                    "name": "AMAZON.HelpIntent"
+                },
+                {
+                    "name": "AMAZON.StopIntent"
+                },
+                {
+                    "name": "PlayLatestPodcastIntent",
+                    "samples": [
+                        "play latest episode",
+                        "play the latest",
+                        "play the latest episode",
+                        "begin the latest episode",
+                        "begin playing the latest episode",
+                        "start latest episode",
+                        "start the latest episode",
+                        "start playing the latest episode",
+                        "and play the latest episode",
+                        "to play the latest episode"
+                    ]
+                },
+                {
+                    "name": "PlayRandomPodcastIntent",
+                    "samples": [
+                        "play anything",
+                        "play something",
+                        "something else",
+                        "play random episode",
+                        "play a random one",
+                        "play a episode",
+                        "begin episode",
+                        "begin playing a episode",
+                        "start episode",
+                        "start a episode",
+                        "start playing a episode",
+                        "start a random episode",
+                        "play any episode",
+                        "start any episode",
+                        "to play an episode",
+                        "and play a random episode"
+                    ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent"
+                },
+                {
+                    "name": "AMAZON.ResumeIntent"
+                },
+                {
+                    "name": "AMAZON.PreviousIntent"
+                },
+                {
+                    "name": "AMAZON.YesIntent"
+                },
+                {
+                    "name": "AMAZON.NoIntent"
+                },
+                {
+                    "name": "AMAZON.NextIntent"
+                },
+                {
+                    "name": "AMAZON.FallbackIntent"
+                }
+            ],
+            "types": []
+        }
+    }
+}

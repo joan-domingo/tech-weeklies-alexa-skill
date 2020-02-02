@@ -2,20 +2,102 @@
   "manifest": {
     "publishingInformation": {
       "locales": {
-        "en-US": {
+        "en-AU": {
           "name": "Futurice Tech Weeklies",
           "summary": "Weekly podcast where Futurice employees share their latest thoughts about tech.",
-          "description": "Weekly podcast at Futurice where developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
+          "description": "Weekly podcast at Futurice where software developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
           "examplePhrases": [
             "Alexa, open Tech Weeklies",
             "Alexa, launch Tech Weeklies and play the latest episode",
-            "Alexa, tell Tech weeklies to play an episode"
+            "Alexa, ask Tech weeklies to play an episode"
           ],
           "keywords": [
             "Futurice",
             "Tech",
             "Weeklies",
-            "Podcasts"
+            "Podcast",
+            "Weekly",
+            "Event"
+          ],
+          "smallIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_108.png",
+          "largeIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_512.png"
+        },
+        "en-CA": {
+          "name": "Futurice Tech Weeklies",
+          "summary": "Weekly podcast where Futurice employees share their latest thoughts about tech.",
+          "description": "Weekly podcast at Futurice where software developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
+          "examplePhrases": [
+            "Alexa, open Tech Weeklies",
+            "Alexa, launch Tech Weeklies and play the latest episode",
+            "Alexa, ask Tech weeklies to play an episode"
+          ],
+          "keywords": [
+            "Futurice",
+            "Tech",
+            "Weeklies",
+            "Podcast",
+            "Weekly",
+            "Event"
+          ],
+          "smallIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_108.png",
+          "largeIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_512.png"
+        },
+        "en-IN": {
+          "name": "Futurice Tech Weeklies",
+          "summary": "Weekly podcast where Futurice employees share their latest thoughts about tech.",
+          "description": "Weekly podcast at Futurice where software developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
+          "examplePhrases": [
+            "Alexa, open Tech Weeklies",
+            "Alexa, launch Tech Weeklies and play the latest episode",
+            "Alexa, ask Tech weeklies to play an episode"
+          ],
+          "keywords": [
+            "Futurice",
+            "Tech",
+            "Weeklies",
+            "Podcast",
+            "Weekly",
+            "Event"
+          ],
+          "smallIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_108.png",
+          "largeIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_512.png"
+        },
+        "en-GB": {
+          "name": "Futurice Tech Weeklies",
+          "summary": "Weekly podcast where Futurice employees share their latest thoughts about tech.",
+          "description": "Weekly podcast at Futurice where software developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
+          "examplePhrases": [
+            "Alexa, open Tech Weeklies",
+            "Alexa, launch Tech Weeklies and play the latest episode",
+            "Alexa, ask Tech weeklies to play an episode"
+          ],
+          "keywords": [
+            "Futurice",
+            "Tech",
+            "Weeklies",
+            "Podcast",
+            "Weekly",
+            "Event"
+          ],
+          "smallIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_108.png",
+          "largeIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_512.png"
+        },
+        "en-US": {
+          "name": "Futurice Tech Weeklies",
+          "summary": "Weekly podcast where Futurice employees share their latest thoughts about tech.",
+          "description": "Weekly podcast at Futurice where software developers from all our offices in Finland, Sweden, Norway and Germany are sharing their experience with various frameworks, languages, techniques, services and projects.",
+          "examplePhrases": [
+            "Alexa, open Tech Weeklies",
+            "Alexa, launch Tech Weeklies and play the latest episode",
+            "Alexa, ask Tech weeklies to play an episode"
+          ],
+          "keywords": [
+            "Futurice",
+            "Tech",
+            "Weeklies",
+            "Podcast",
+            "Weekly",
+            "Event"
           ],
           "smallIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_108.png",
           "largeIconUri": "https://raw.githubusercontent.com/joan-domingo/tech-weeklies-alexa-skill/master/img/Tech_Weeklies_Square_Logo_512.png"
