@@ -2,6 +2,17 @@
 
 # Futurice Tech Weeklies Alexa Skill
 
+## Published to English skill stores
+[en-AU](https://www.amazon.com.au/dp/B084F7HZQ2/)
+
+[en-CA](https://www.amazon.ca/dp/B084F7HZQ2/)
+
+[en-GB](https://www.amazon.co.uk/dp/B084F7HZQ2/)
+
+[en-IN](https://www.amazon.in/dp/B084F7HZQ2/)
+
+[en-US](https://www.amazon.com/dp/B084F7HZQ2)
+
 ## Skill Architecture
 Each skill consists of two basic parts, a front end and a back end.
 The front end is the voice interface, or VUI.
